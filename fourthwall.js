@@ -248,12 +248,12 @@ function fw_comment(e,id,override) {
 		if($(active_para).children(".fw_para_comment_box").html()==undefined){
 			fw_comment_selected_para = id;
 			$(active_para).attr("class","story_paragraph_commented");
-			$(active_para).append("<div id=\"fw_para_comment_form\" style=\"width: 100%; margin: 0px;\"><div contenteditable id=\"fw_para_commentfield\" class=\"divtextarea\"></div><span class=\"post_buttons\"><span onclick=\"fw_postcomment(0)\"><a title=\"Post comment (visible to all)\">"+fw_post_comment_char+"</a></span><span onclick=\"fw_postcomment(1)\"><a title=\"Post comment (visible to admins only)\">"+fw_post_comment_restricted_char+"</a></span><span onclick=\"fw_comment(this,'"+id+"',true)\"><a title=\"Cancel\">"+fw_cancel_char+"</a></span></span></div>");
+			$(active_para).append("<div id=\"fw_para_comment_form\" style=\"width: 100%; margin: 0px;\"><textarea id=\"fw_para_commentfield\" class=\"divtextarea\"></textarea><span class=\"post_buttons\"><span onclick=\"fw_postcomment(0)\"><a title=\"Post comment (visible to all)\">"+fw_post_comment_char+"</a></span><span onclick=\"fw_postcomment(1)\"><a title=\"Post comment (visible to admins only)\">"+fw_post_comment_restricted_char+"</a></span><span onclick=\"fw_comment(this,'"+id+"',true)\"><a title=\"Cancel\">"+fw_cancel_char+"</a></span></span></div>");
 		}
 	}
 	else {
 		if(fw_comment_selected_para===id) {
-			if($("#fw_para_commentfield").html()=="" || override==true) {
+			if($("#fw_para_commentfield").val()=="" || override==true) {
 				$(active_para).attr("class","story_paragraph");
 				$("#fw_para_comment_form").remove();
 				fw_comment_selected_para="";
@@ -264,7 +264,7 @@ function fw_comment(e,id,override) {
 
 
 function fw_postcomment(is_private) {
-	var comment_text = $("#fw_para_commentfield").html();
+	var comment_text = $("#fw_para_commentfield").val();
 	console.log(comment_text);
 	console.log(encodeURI(comment_text));
 	var xmlHTTP = new XMLHttpRequest();
