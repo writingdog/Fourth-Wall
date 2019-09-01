@@ -63,7 +63,7 @@ textarea {
 	font-size: 10pt;
 	line-height: 10pt;
 	opacity: .25;
-	.moz-opacity: .25;	
+	moz-opacity: .25;	
 }
 .nudge_choice {
 	display: block;
