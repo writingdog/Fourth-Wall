@@ -53,6 +53,7 @@ else:
 	intro = "&lt;i&gt;While reading this story, you will occasionally see highlighted text that you can click on. There are two kinds here: [[worldbuilding notes]] and [[behind the scenes commentary]]. I hope that this is helpful to you in getting the most out of this story :) Enjoy!&lt;/i&gt;"
 
 xmlout = open("{}.xml".format(to),"w")
+htmlout = open("{}_processed.html".format(to),"w")
 
 xmlout.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<content>\n\t<metadata>\n\t\t<title>{}</title>\n\t\t<date>{}</date>\n\t\t<author>{}</author>\n\t\t<table></table>\n\t\t<style>\n\t\t\t<paragraph_color>#E7E7C8</paragraph_color>\n\t\t</style>\n\t\t{}\t\t<hints>\n".format(tn,td,ta,tv))
 
@@ -186,10 +187,14 @@ for line in lines:
 					else:
 						xmlout.write("\t\t\t<requirements />\n\t\t\t<content>\n")
 				else:
-					line = re.sub(r"(]])",lambda m : "|{}{}".format(numnotes(),m.group(1)),line);
-					xmlout.write(line+"\n")
+					line_xml = re.sub(r"(]])",lambda m : "|{}{}".format(numnotes(),m.group(1)),line);
+					line_html = string.replace(line,"]]","")
+					line_html = string.replace(line_html,"[[","")
+					xmlout.write(line_xml+"\n")
+					htmlout.write("<p>&lt;p&gt;{}&lt;/p&gt;</p>\n".format(line_html))
 #print(lastnotes)
 print("INSERT SUMMARY HERE. Adult. First posted {}. Includes notes{} and commentary.".format(td,tstring))
 xmlout.write("\t\t\t</content>\n\t\t\t<nudges />\n\t\t</section>\n\t</textsections>\n</content>")
 
 xmlout.close()
+htmlout.close()
