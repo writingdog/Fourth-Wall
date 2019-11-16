@@ -246,6 +246,21 @@ textarea {
 	margin-left: auto;
 	margin-right: auto;
 }
+.fw_interlink {
+	font-size: 60%;
+	border: 1px solid black;
+	border-radius: 2px;
+	background-color: white;
+	padding: 1px 10px 1px 10px;
+	margin-right: 5px;
+	display: inline-block;
+	position: relative;
+	bottom: 10px;
+}
+.fw_interlink_container {
+	display: inline-block;
+	line-height: inherit;
+}
 @media only screen and (max-width: 720px) {
 	.story_wrapper {
 		margin: 0px;
