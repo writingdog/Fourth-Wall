@@ -55,15 +55,16 @@ for arg in sys.argv:
 
 hintboiler = [
 	"When you see this color, you can click on the text to learn more about a reference in the story or an explanation of a term. Click again to dismiss!",
+	"When you see this color, you can click to see which story this refers to.",
 	"When you see this color, you can click on the text to see my thoughts as the author of the story, or additional commentary on why I wrote it the way I did. &lt;i&gt;Please note that this might involve spoilers!&lt;/i&gt; If so, the hint border will be a dashed red line instead of a dotted line. Click again to dismiss!",
 	"When you see this color, you can click on the text to see what it means. Click again to dismiss!"
 ]
-hintcolor = ["#A9E2F3","#F5DA81","#F5ECCE"]
+hintcolor = ["#A9E2F3","#8bcc9d","#F5DA81","#F5ECCE"]
 
 if tt=="1":
-	intro = "&lt;i&gt;While reading this story, you will occasionally see highlighted text that you can click on. There are three kinds here: [[explanatory notes]], [[behind the scenes commentary]], and [[translations]]. I hope that this is helpful to you in getting the most out of this story :) Enjoy!&lt;/i&gt;"
+	intro = "&lt;i&gt;While reading this story, you will occasionally see highlighted text that you can click on. There are four kinds here: [[explanatory notes]], [[behind the scenes commentary]], [[story interlinks]], and [[translations]]. I hope that this is helpful to you in getting the most out of this story :) Enjoy!&lt;/i&gt;"
 else:
-	intro = "&lt;i&gt;While reading this story, you will occasionally see highlighted text that you can click on. There are two kinds here: [[worldbuilding notes]] and [[behind the scenes commentary]]. I hope that this is helpful to you in getting the most out of this story :) Enjoy!&lt;/i&gt;"
+	intro = "&lt;i&gt;While reading this story, you will occasionally see highlighted text that you can click on. There are three kinds here: [[worldbuilding notes]], [[story interlinks]] and [[behind the scenes commentary]]. I hope that this is helpful to you in getting the most out of this story :) Enjoy!&lt;/i&gt;"
 
 xmlout = open("{}.xml".format(to),"w")
 htmlout = open("{}_processed.html".format(to),"w")
@@ -111,7 +112,7 @@ if inline == True:
 
 # preprocess section
 
-for i in range(0,int(tt)+2):
+for i in range(0,int(tt)+3):
 	xmlout.write("\t\t\t<hint>\n\t\t\t\t<id>{}</id>\n".format(comments))
 	xmlout.write("\t\t\t\t<color>{}</color>\n".format(hintcolor[i]))
 	xmlout.write("\t\t\t\t<text>{}</text>\n\t\t\t</hint>\n".format(hintboiler[i]))
@@ -145,20 +146,25 @@ for line in lines:
 				if len(ldata) == 1:
 					# This is a special check for if the comment doesn't have a class associated with it.
 					ldata = ["#A9E2F3",line]
-				if ldata[0]=="N":
+				if ldata[0]=="N" or ldata[0]=="NI":
 					lcolor = "#A9E2F3"
-				elif ldata[0]=="C":
+				elif ldata[0]=="C" or ldata[0]=="CI":
 					lcolor = "#F5DA81"
 				elif ldata[0]=="T":
 					lcolor = "#F5ECCE"
-				elif ldata[0]=="S":
+				elif ldata[0]=="I":
+					lcolor = "#8bcc9d"
+					ldata[1] = "+{}+".format(ldata[1])
+				elif ldata[0]=="S" or ldata[0]=="SI":
 					lcolor = "#F5DA81"
 				else:
 					lcolor = ldata[0]
 				xmlout.write("\t\t\t<hint>\n\t\t\t\t<id>{}</id>\n".format(comments))
 				xmlout.write("\t\t\t\t<color>{}</color>\n".format(lcolor))
-				if ldata[0]=="S":
+				if ldata[0]=="S" or ldata[0]=="SI":
 					xmlout.write("\t\t\t\t<spoiler>true</spoiler>\n")
+				if ldata[0]=="I" or ldata[0]=="NI" or ldata[0]=="CI" or ldata[0]=="SI":
+					xmlout.write("\t\t\t\t<interlink>true</interlink>\n")
 				xmlout.write("\t\t\t\t<text>{}</text>\n\t\t\t</hint>\n".format(ldata[1]))
 				#output_file.write(line+"\n")
 				comments = comments + 1
