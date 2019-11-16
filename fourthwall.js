@@ -1,5 +1,5 @@
 "use strict";
-var fw_version_no = "0.51.1";
+var fw_version_no = "0.62.0";
 var fw_story_raw_data;
 var fw_last_changed_frame;
 var fw_story_xml;
@@ -13,6 +13,7 @@ var fw_story_section_variants_status_change = {};
 var fw_hint_text = {};
 var fw_hint_colors = {};
 var fw_hint_spoiler = {}; // true if the hint is marked as a 'spoiler'
+var fw_hint_interlink = {}; // true if the hint is marked as containing an interlink to another story
 var fw_comments = {};
 var fw_show_missing = false; //set to "false" to hide missing frames.
 var fw_debug_start = 0;
@@ -95,7 +96,30 @@ function fw_do_hint(evt,id) {
 		fw_do_hint_fade(id);
 		// End new block.
 		$("#hint_textbox").show();
-		$("#hint_textbox").html(fw_hint_text[id]);
+		if(fw_hint_interlink[id]===true) {
+			// New in FW 0.60: Story interlink handling.
+			var smids = Object.keys(fw_storymap); // This should be defined in a separate, included file.
+			var hint_interlink_text = fw_hint_text[id];
+			if(smids.length==0) { 
+				$("#hint_textbox").html(fw_hint_text[id]); // If for some reason fw_storymap is undefined
+			}
+			else {
+				for(var i=0;i<smids.length;i++) {
+					var link_string = "<div class=\"fw_interlink_container\">"; // Add a hyperlink for each defined link in the link map
+					for(var j=0;j<fw_storymap[smids[i]][1].length;j++) {
+						link_string += "<a class=\"fw_interlink\" href=\""+fw_storymap[smids[i]][1][j][1]+"\">"+fw_storymap[smids[i]][1][j][0]+"</a>";
+					}
+					link_string += "</div>";
+					// At the conclusion of the for loop, we should have a link string that looks like for example
+					// <a href=$VALID SO FURRY HYPERLINK>SoFurry</a> <a href=$VALID SMASHWORDS LINK>SmashWords</a>
+					hint_interlink_text = hint_interlink_text.replace("+"+smids[i]+"+",fw_storymap[smids[i]][0]+" "+link_string);
+				}
+			}
+			$("#hint_textbox").html(hint_interlink_text);
+		}
+		else {
+			$("#hint_textbox").html(fw_hint_text[id]);
+		}
 		hint_active=true;
 		fw_hint_id=id;
 	}
@@ -113,7 +137,30 @@ function fw_do_hint(evt,id) {
 			fw_do_hint_fade(id);
 			// End new block.
 			$("#hint_textbox").css("background-color",fw_hint_colors[id]);
-			$("#hint_textbox").html(fw_hint_text[id]);
+			if(fw_hint_interlink[id]===true) {
+				// New in FW 0.60: Story interlink handling.
+				var smids = Object.keys(fw_storymap); // This should be defined in a separate, included file.
+				var hint_interlink_text = fw_hint_text[id];
+				if(smids.length==0) { 
+					$("#hint_textbox").html(fw_hint_text[id]); // If for some reason fw_storymap is undefined
+				}
+				else {
+					for(var i=0;i<smids.length;i++) {
+						var link_string = "<div class=\"fw_interlink_container\">"; // Add a hyperlink for each defined link in the link map
+						for(var j=0;j<fw_storymap[smids[i]][1].length;j++) {
+							link_string += "<a class=\"fw_interlink\" href=\""+fw_storymap[smids[i]][1][j][1]+"\">"+fw_storymap[smids[i]][1][j][0]+"</a>";
+						}
+						link_string += "</div>";
+						// At the conclusion of the for loop, we should have a link string that looks like for example
+						// <a href=$VALID SO FURRY HYPERLINK>SoFurry</a> <a href=$VALID SMASHWORDS LINK>SmashWords</a>
+						hint_interlink_text = hint_interlink_text.replace("+"+smids[i]+"+",fw_storymap[smids[i]][0]+" "+link_string);
+					}
+				}
+				$("#hint_textbox").html(hint_interlink_text);
+			}
+			else {
+				$("#hint_textbox").html(fw_hint_text[id]);
+			}
 			fw_hint_id=id;
 		}
 	}
@@ -791,16 +838,24 @@ Story skeleton is initialized by creating a bare div for every unique story sect
 		fw_hint_colors[$(this).find("id").text()] = color; // sets the background color of the hint.
 		fw_hint_text[$(this).find("id").text()] = $(this).find("text").text();
 		try {
-			var spoiler = $(this).find("spoiler").text();
+			var spoiler = $(this).find("spoiler").text(); // Set by the simpleconvert preprocessor to "true" if the hint should be spoiler-marked
+			var interlink = $(this).find("interlink").text(); // Set by the simpleconvert preprocessor to "true" if the hint contains an interlinked story
 			if(spoiler=="true") {
 				fw_hint_spoiler[$(this).find("id").text()] = true;
 			}
 			else {
 				fw_hint_spoiler[$(this).find("id").text()] = false;
 			}
+			if(interlink=="true") {
+				fw_hint_interlink[$(this).find("id").text()] = true;
+			}
+			else {
+				fw_hint_interlink[$(this).find("id").text()] = false;
+			}
 		}
 		catch(e) {
 			fw_hint_spoiler[$(this).find("id").text()] = false;
+			fw_hint_interlink[$(this).find("id").text()] = false;
 			console.log(e);
 		}
 	});	
