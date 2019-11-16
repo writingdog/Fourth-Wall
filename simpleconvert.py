@@ -13,6 +13,8 @@ to = "name of the output file"
 td = "date file was created"
 tt = 0 # Whether this text also includes translations
 ta = "Rob Baird"
+tl = "Adult."
+ts = "INSERT SUMMARY HERE."
 #td = "July 6th, 2015"
 tv = "<variables />\n"
 tstring = ""
@@ -23,6 +25,17 @@ for arg in sys.argv:
 	if asubs[0] == "--name":
 		to = asubs[1]
 		print(to)
+	elif asubs[0] == "--adult":
+		if asubs[1] == "0":
+			tl = "Clean."
+		elif asubs[1] == "1":
+			tl = "Adult."
+		elif asubs[1] == "2":
+			tl = "Adult; content warnings apply."
+		else:
+			tl = "Ault."
+	elif asubs[0] == "--summary":
+		ts = asubs[1]
 	elif asubs[0] == "--title":
 		tn = asubs[1]
 	elif asubs[0] == "--date":
@@ -54,6 +67,8 @@ else:
 
 xmlout = open("{}.xml".format(to),"w")
 htmlout = open("{}_processed.html".format(to),"w")
+
+htmlout.write("<p>&lt;p style=\"font-size:2pt;\"&gt;</p><p>&lt;em&gt;{}&lt;/em&gt;</p><p>&lt;/p&gt;</p><p>&lt;p style=\"font-size:10px;\"&gt;</p><p>	&lt;em&gt;SUMMARYGOESHERE. &lt;a href=\"https://www.patreon.com/writingdog\"&gt;Patreon subscribers&lt;/a&gt;, this should also be live for you with notes and maps and stuff.&lt;/em&gt;&lt;/p&gt;</p><p>&lt;p style=\"font-size:10px;\"&gt;</p><p>	&lt;em&gt;Released under the Creative Commons BY-NC-SA license. Share, modify, and redistribute--as long as it's attributed and noncommercial, anything goes.</p><p>	&lt;/em&gt;</p><p>&lt;/p&gt;</p><p>&lt;p&gt;</p><p>	---</p><p>&lt;/p&gt;</p><p>&lt;p&gt;</p><p>	&lt;em&gt;{}&lt;/em&gt;, by &lt;strong&gt;Rob Baird&lt;/strong&gt;</p><p>&lt;/p&gt;</p>\n".format(ts,tn))
 
 xmlout.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<content>\n\t<metadata>\n\t\t<title>{}</title>\n\t\t<date>{}</date>\n\t\t<author>{}</author>\n\t\t<table></table>\n\t\t<style>\n\t\t\t<paragraph_color>#E7E7C8</paragraph_color>\n\t\t</style>\n\t\t{}\t\t<hints>\n".format(tn,td,ta,tv))
 
@@ -191,9 +206,10 @@ for line in lines:
 					line_html = string.replace(line,"]]","")
 					line_html = string.replace(line_html,"[[","")
 					xmlout.write(line_xml+"\n")
-					htmlout.write("<p>&lt;p&gt;{}&lt;/p&gt;</p>\n".format(line_html))
+					if(line_html!=""):
+						htmlout.write("<p>&lt;p&gt;{}&lt;/p&gt;</p>\n".format(line_html))
 #print(lastnotes)
-print("INSERT SUMMARY HERE. Adult. First posted {}. Includes notes{} and commentary.".format(td,tstring))
+print("{} {} First posted {}. Includes notes{} and commentary.".format(ts,tl,td,tstring))
 xmlout.write("\t\t\t</content>\n\t\t\t<nudges />\n\t\t</section>\n\t</textsections>\n</content>")
 
 xmlout.close()
