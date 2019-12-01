@@ -1,5 +1,5 @@
 "use strict";
-var fw_version_no = "0.62.0";
+var fw_version_no = "0.63.15";
 var fw_story_raw_data;
 var fw_last_changed_frame;
 var fw_story_xml;
@@ -112,7 +112,15 @@ function fw_do_hint(evt,id) {
 					link_string += "</div>";
 					// At the conclusion of the for loop, we should have a link string that looks like for example
 					// <a href=$VALID SO FURRY HYPERLINK>SoFurry</a> <a href=$VALID SMASHWORDS LINK>SmashWords</a>
-					hint_interlink_text = hint_interlink_text.replace("+"+smids[i]+"+",fw_storymap[smids[i]][0]+" "+link_string);
+					var itxt = smids[i]; // This is the story ID ("+moby_dick+") that we're trying to replace.
+					var rtxt = fw_storymap[smids[i]][0];
+					var rq = "";
+					if(rtxt.substr(-7)=="&rdquo;") {
+						rtxt = rtxt.substr(0,rtxt.length-7);
+						rq = "&rdquo;";
+					} // i.e. the story's given title ends with a quote mark. So we strip this for the purposes of replacement.
+					var itr = new RegExp("\\+"+itxt+"\\+"+"([.?!,])?","g");
+					hint_interlink_text = hint_interlink_text.replace(itr,rtxt+"$1"+rq+" "+link_string);
 				}
 			}
 			$("#hint_textbox").html(hint_interlink_text);
@@ -153,7 +161,16 @@ function fw_do_hint(evt,id) {
 						link_string += "</div>";
 						// At the conclusion of the for loop, we should have a link string that looks like for example
 						// <a href=$VALID SO FURRY HYPERLINK>SoFurry</a> <a href=$VALID SMASHWORDS LINK>SmashWords</a>
-						hint_interlink_text = hint_interlink_text.replace("+"+smids[i]+"+",fw_storymap[smids[i]][0]+" "+link_string);
+						var itxt = smids[i]; // This is the story ID ("+moby_dick+") that we're trying to replace.
+						var rtxt = fw_storymap[smids[i]][0];
+						var rq = "";
+						if(rtxt.substr(-7)=="&rdquo;") {
+							rtxt = rtxt.substr(0,rtxt.length-7);
+							rq = "&rdquo;";
+						} // i.e. the story's given title ends with a quote mark. So we strip this for the purposes of replacement.
+						var itr = new RegExp("\\+"+itxt+"\\+"+"([.?!,])?","g");
+						hint_interlink_text = hint_interlink_text.replace(itr,rtxt+"$1"+rq+" "+link_string);
+						//hint_interlink_text = hint_interlink_text.replace("+"+smids[i]+"+",fw_storymap[smids[i]][0]+" "+link_string);
 					}
 				}
 				$("#hint_textbox").html(hint_interlink_text);
