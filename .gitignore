@@ -4,3 +4,4 @@
 *.xml
 *.rtf
 convert_source.py
+convert.sh
