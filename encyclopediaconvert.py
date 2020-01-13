@@ -61,7 +61,7 @@ for line in lines:
 				inentry = False
 				xmlout.write("\t\t\"paras\":[\n")
 				for a in entryarr:
-					xmlout.write("\t\t\t[{}],\n".format(a))
+					xmlout.write("\t\t\t[\"{}\"],\n".format(a))
 				xmlout.write("\t\t]\n\t},\n")
 				entryarr = []
 			else:
