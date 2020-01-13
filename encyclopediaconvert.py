@@ -9,7 +9,7 @@ notes = 0
 
 to = "encyclopedia"
 
-xmlout = open("{}.json".format(to),"w")
+xmlout = open("{}.js".format(to),"w")
 
 xmlout.write("entries = {\n")
  
