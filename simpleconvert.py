@@ -32,6 +32,8 @@ for arg in sys.argv:
 			tl = "Adult."
 		elif asubs[1] == "2":
 			tl = "Adult; content warnings apply."
+		elif asubs[1] == "3":
+			tl = "Adult (optionally, includes clean variant)."
 		else:
 			tl = "Ault."
 	elif asubs[0] == "--summary":
