@@ -31,6 +31,8 @@ var fw_storymap = {
     "s4e2":["&ldquo;Homecoming, Part II&rdquo;",[["SoFurry","https://www.sofurry.com/view/1393081"]]],
     "s4e3":["&ldquo;Salvage&rdquo;",[["SoFurry","https://www.sofurry.com/view/1513643"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s4e3-salvage"]]],
     "s4e4":["&ldquo;Responsibility to Protect&rdquo;",[["SoFurry","https://www.sofurry.com/view/1530370"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s4e4-responsibility-protect"]]],
+    "s4e5":["&ldquo;Agendas&rdquo;",[["SoFurry",""],["Writing Dot Dog",""]]],
+    "s5e1":["&ldquo;Intruders&rdquo;",[["SoFurry",""],["Writing Dot Dog",""]]],
     "keep_the_wings":["&ldquo;Keep the Wings Level and True&rdquo;",[["SoFurry","https://www.sofurry.com/view/1429012"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/keep-wings-level-and-true"]]],
     "reckless":["&ldquo;Reckless&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/reckless"]]],
     "dog_star":["&ldquo;Dog Star&rdquo;",[["SoFurry","https://www.sofurry.com/view/285769"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/dog-star"]]],

@@ -9,7 +9,7 @@ notes = 0
 
 to = "encyclopedia"
 
-xmlout = open("{}.js".format(to),"w")
+xmlout = open("{}_content.js".format(to),"w")
 
 xmlout.write("entries = {\n")
  
@@ -31,14 +31,14 @@ for line in lines:
 		line = string.replace(line,"<br>","")
 		line = re.sub("<p class=\"?.*?\">","",line)
 		line = re.sub("<span class=\"?.*?\">","",line)
-		line = string.replace(line,"\"","&#038;quot;")
-		line = string.replace(line,"“","&#038;ldquo;")
-		line = string.replace(line,"”","&#038;rdquo;")
-		line = string.replace(line,"‘","&#038;lsquo;")
-		line = string.replace(line,"’","&#038;rsquo;")
-		line = string.replace(line,"'","&#038;apos;")
-		line = string.replace(line,"<","&lt;")
-		line = string.replace(line,">","&gt;")
+		line = string.replace(line,"\"","&quot;")
+		line = string.replace(line,"“","&ldquo;")
+		line = string.replace(line,"”","&rdquo;")
+		line = string.replace(line,"‘","&lsquo;")
+		line = string.replace(line,"’","&rsquo;")
+		line = string.replace(line,"'","&apos;")
+		#line = string.replace(line,"<","&lt;")
+		#line = string.replace(line,">","&gt;")
 		if(inentry==False):
 			if(len(line)!=0):
 				inentry = True
@@ -61,7 +61,7 @@ for line in lines:
 				inentry = False
 				xmlout.write("\t\t\"paras\":[\n")
 				for a in entryarr:
-					xmlout.write("\t\t\t[\"{}\"],\n".format(a))
+					xmlout.write("\t\t\t\"{}\",\n".format(a))
 				xmlout.write("\t\t]\n\t},\n")
 				entryarr = []
 			else:
