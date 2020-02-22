@@ -3,5 +3,6 @@
 *.html
 *.xml
 *.rtf
+*.txt
 convert_source.py
 convert.sh

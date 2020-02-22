@@ -15,6 +15,7 @@ tt = 0 # Whether this text also includes translations
 ta = "Rob Baird"
 tl = "Adult."
 ts = "INSERT SUMMARY HERE."
+te = "INSERT EXTENDED SUMMARY HERE" # extended summary (2/s)
 #td = "July 6th, 2015"
 tv = "<variables />\n"
 tstring = ""
@@ -38,6 +39,8 @@ for arg in sys.argv:
 			tl = "Ault."
 	elif asubs[0] == "--summary":
 		ts = asubs[1]
+	elif asubs[0] == "--extended":
+		te = asubs[1]
 	elif asubs[0] == "--title":
 		tn = asubs[1]
 	elif asubs[0] == "--date":
@@ -70,8 +73,11 @@ else:
 
 xmlout = open("{}.xml".format(to),"w")
 htmlout = open("{}_processed.html".format(to),"w")
+txtout = open("{}_fa.txt".format(to),"w")
 
-htmlout.write("<p>&lt;p style=\"font-size:2pt;\"&gt;</p><p>&lt;em&gt;{}&lt;/em&gt;</p><p>&lt;/p&gt;</p><p>&lt;p style=\"font-size:10px;\"&gt;</p><p>	&lt;em&gt;SUMMARYGOESHERE. &lt;a href=\"https://www.patreon.com/writingdog\"&gt;Patreon subscribers&lt;/a&gt;, this should also be live for you with notes and maps and stuff.&lt;/em&gt;&lt;/p&gt;</p><p>&lt;p style=\"font-size:10px;\"&gt;</p><p>	&lt;em&gt;Released under the Creative Commons BY-NC-SA license. Share, modify, and redistribute--as long as it's attributed and noncommercial, anything goes.</p><p>	&lt;/em&gt;</p><p>&lt;/p&gt;</p><p>&lt;p&gt;</p><p>	---</p><p>&lt;/p&gt;</p><p>&lt;p&gt;</p><p>	&lt;em&gt;{}&lt;/em&gt;, by &lt;strong&gt;Rob Baird&lt;/strong&gt;</p><p>&lt;/p&gt;</p>\n".format(ts,tn))
+htmlout.write("<p>&lt;p style=\"font-size:2pt;\"&gt;</p><p>&lt;em&gt;{}&lt;/em&gt;</p><p>&lt;/p&gt;</p><p>&lt;p style=\"font-size:10px;\"&gt;</p><p>	&lt;em&gt;{} &lt;a href=\"https://www.patreon.com/writingdog\"&gt;Patreon subscribers&lt;/a&gt;, this should also be live for you with notes and maps and stuff.&lt;/em&gt;&lt;/p&gt;</p><p>&lt;p style=\"font-size:10px;\"&gt;</p><p>	&lt;em&gt;Released under the Creative Commons BY-NC-SA license. Share, modify, and redistribute--as long as it's attributed and noncommercial, anything goes.</p><p>	&lt;/em&gt;</p><p>&lt;/p&gt;</p><p>&lt;p&gt;</p><p>	---</p><p>&lt;/p&gt;</p><p>&lt;p&gt;</p><p>	&lt;em&gt;{}&lt;/em&gt;, by &lt;strong&gt;Rob Baird&lt;/strong&gt;</p><p>&lt;/p&gt;</p>\n".format(ts,te,tn))
+
+txtout.write("[i]{}[/i]\n\n[i]{}. [url=\"https://www.patreon.com/writingdog\"]Patreon subscribers[/url], this should also be live for you with notes and maps and stuff.[/i]\n\n[i]Released under the Creative Commons BY-NC-SA license. Share, modify, and redistribute--as long as it's attributed and noncommercial, anything goes.[/i]\n\n".format(ts,te))
 
 xmlout.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<content>\n\t<metadata>\n\t\t<title>{}</title>\n\t\t<date>{}</date>\n\t\t<author>{}</author>\n\t\t<table></table>\n\t\t<style>\n\t\t\t<paragraph_color>#E7E7C8</paragraph_color>\n\t\t</style>\n\t\t{}\t\t<hints>\n".format(tn,td,ta,tv))
 
@@ -129,6 +135,7 @@ for line in lines:
 		line = string.replace(line,"<br>","")
 		line = re.sub("<p class=\"?.*?\">","",line)
 		line = re.sub("<span class=\"?.*?\">","",line)
+		unconvert = line
 		line = string.replace(line,"\"","&#038;quot;")
 		line = string.replace(line,"“","&#038;ldquo;")
 		line = string.replace(line,"”","&#038;rdquo;")
@@ -213,12 +220,26 @@ for line in lines:
 					line_xml = re.sub(r"(]])",lambda m : "|{}{}".format(numnotes(),m.group(1)),line);
 					line_html = string.replace(line,"]]","")
 					line_html = string.replace(line_html,"[[","")
+					line_txt = string.replace(unconvert,"]]","")
+					line_txt = string.replace(line_txt,"[[","")
+					line_txt = string.replace(line_txt,"<em>","[i]")
+					line_txt = string.replace(line_txt,"</em>","[/i]")
+					line_txt = string.replace(line_txt,"</i>","[/i]")
+					line_txt = string.replace(line_txt,"<i>","[i]")
+					line_txt = string.replace(line_txt,"<strong>","[b]")
+					line_txt = string.replace(line_txt,"</strong>","[/b]")
+					line_txt = string.replace(line_txt,"<b>","[b]")
+					line_txt = string.replace(line_txt,"</b>","[/b]")
+					line_txt = string.replace(line_txt,"<","[")
+					line_txt = string.replace(line_txt,">","]")
 					xmlout.write(line_xml+"\n")
-					if(line_html!=""):
+					if(line_html!="" and line_txt!=""):
 						htmlout.write("<p>&lt;p&gt;{}&lt;/p&gt;</p>\n".format(line_html))
+						txtout.write("{}\n\n".format(line_txt))
 #print(lastnotes)
 print("{} {} First posted {}. Includes notes{} and commentary.".format(ts,tl,td,tstring))
 xmlout.write("\t\t\t</content>\n\t\t\t<nudges />\n\t\t</section>\n\t</textsections>\n</content>")
 
 xmlout.close()
 htmlout.close()
+txtout.close()

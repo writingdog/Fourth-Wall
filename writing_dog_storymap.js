@@ -1,4 +1,5 @@
 var fw_storymap = {
+    //Casey and Dev stories here
 	"tricks":["&ldquo;Tricks&rdquo;",[["SoFurry","https://www.sofurry.com/view/834101"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/tricks"]]],
 	"have_some_fun_tonight":["&ldquo;Have Some Fun Tonight&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/have-some-fun-tonight"]]],
 	"but_what_a_thrill":["&ldquo;But What a Thrill!&rdquo;",[["SoFurry","https://www.sofurry.com/view/1222653"]]],
@@ -9,9 +10,8 @@ var fw_storymap = {
 	"a_day_in_the_life":["&ldquo;A Day in the Life&rdquo;",[["SoFurry","https://www.sofurry.com/view/1487060"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/day-life"]]],
 	"closure":["&ldquo;Closure&rdquo;",[["SoFurry","https://www.sofurry.com/view/1508521"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/closure"]]],
     "the_trouble_with_coyotes":["<em>The Trouble With Coyotes</em>",[["SoFurry","https://www.sofurry.com/view/1102191"]]],
-    "the_hot_equations":["&ldquo;The Hot Equations&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/hot-equations"]]],
-    "straighten_up_and_fly_right":["&ldquo;Straighten Up and Fly Right&rdquo;",[["SoFurry","https://www.sofurry.com/view/1210932"]]],
-    "you_are_leaving_the_american_sector":["&ldquo;You Are Leaving the American Sector&rdquo;",[["SoFurry","https://www.sofurry.com/view/306184"]]],
+    
+    //Star Patrol stories here
     "s1e1":["&ldquo;Last Chances&rdquo;",[["SoFurry","https://www.sofurry.com/view/822973"]]],
     "s1e2":["&ldquo;Risk and Reward&rdquo;",[["SoFurry","https://www.sofurry.com/view/824485"]]],
     "s1e3":["&ldquo;Madison May of the Star Patrol!&rdquo;",[["SoFurry","https://www.sofurry.com/view/827655"]]],
@@ -31,30 +31,54 @@ var fw_storymap = {
     "s4e2":["&ldquo;Homecoming, Part II&rdquo;",[["SoFurry","https://www.sofurry.com/view/1393081"]]],
     "s4e3":["&ldquo;Salvage&rdquo;",[["SoFurry","https://www.sofurry.com/view/1513643"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s4e3-salvage"]]],
     "s4e4":["&ldquo;Responsibility to Protect&rdquo;",[["SoFurry","https://www.sofurry.com/view/1530370"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s4e4-responsibility-protect"]]],
-    "s4e5":["&ldquo;Agendas&rdquo;",[["SoFurry",""],["Writing Dot Dog",""]]],
-    "s5e1":["&ldquo;Intruders&rdquo;",[["SoFurry",""],["Writing Dot Dog",""]]],
-    "keep_the_wings":["&ldquo;Keep the Wings Level and True&rdquo;",[["SoFurry","https://www.sofurry.com/view/1429012"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/keep-wings-level-and-true"]]],
+    "s4e5":["&ldquo;Agendas&rdquo;",[["SoFurry","https://www.sofurry.com/view/1539089"],["Writing Dot Dog",""]]],
+    "s5e1":["&ldquo;Intruders&rdquo;",[["SoFurry",""],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s4e5-agendas"]]],
+    "blinded_by_the_light":["&ldquo;Blinded By the Light&rdquo;",[["SoFurry","https://www.sofurry.com/view/1169594"]]],
+    "working_like_a_dog":["&ldquo;Workin' Like a Dog&rdquo;",[["SoFurry","https://www.sofurry.com/view/597929"]]],
+    "monday_morning_rail":["&ldquo;Monday Morning Rail&rdquo;",[["SoFurry","https://www.sofurry.com/view/321538"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/monday-morning-rail"]]],
+    
+    //Cannon Shoals stories begin here
+    "picture_perfect_memories":["&ldquo;Picture Perfect Memories&rdquo;",[["SoFurry","https://www.sofurry.com/view/1319970"]]],
+    "no_place_like_home":["&ldquo;No Place Like Home for the Holidays&rdquo;",[["SoFurry","https://www.sofurry.com/view/597929"]]],
+    "one_for_the_road":["&ldquo;One More for the Road&rdquo;",[["SoFurry","https://www.sofurry.com/view/966903"]]],
+    "smalltownlies":["&ldquo;Small-Town Lies&rdquo;",[["SoFurry","https://www.sofurry.com/view/1049718"]]],
+    "friendofthedevil":["&ldquo;Friend of the Devil&rdquo;",[["SoFurry","https://www.sofurry.com/view/1051901"]]],
+    "consequences":["&ldquo;Consequences&rdquo;",[["SoFurry","https://www.sofurry.com/view/1077007"]]],
+    "favors":["&ldquo;Favors&rdquo;",[["SoFurry","https://www.sofurry.com/view/1090621"]]],
+    "graceland":["&ldquo;Graceland&rdquo;",[["SoFurry","https://www.sofurry.com/view/1373541"]]],
+    "a_few_minutes_of_darkness":["&ldquo;Graceland&rdquo;",[["SoFurry","https://www.sofurry.com/view/1228923"]]],
+    "that_m_word":["&ldquo;That 'M'-Word&rdquo;",[["SoFurry","https://www.sofurry.com/view/753065"]]],
+    
+
+    //Moreauverse stories begin here
+    "swinging_on_a_star":["&ldquo;Swingin' On a Star&rdquo;",[["SoFurry","https://www.sofurry.com/view/799867"]]],
+    "hatikvah":["<em>Hatikvah</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=65555"]]],
+	"steel_and_fire_and_stone":["<em>Hatikvah</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=25214"]]],
+    "cry_havoc_1":["<em>Hatikvah</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=19161"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/cry-havoc-chapter-1-and-what-rough-beast"]]],
+    "bad_dog":["&ldquo;Bad Dog!&rdquo;",[["SoFurry","https://www.sofurry.com/view/316964"]]],
+    "shantih":["&ldquo;Shantih&rdquo;",[["SoFurry","https://www.sofurry.com/view/1434250"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/shantih"]]],
+
+    //Brave New World stories go here
+    "there_shall_be_wings":["<em>There Shall Be Wings</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=53225"]]],
+    "irr_1":["&ldquo;Gotta Take It Like You Find It&rdquo;",[["SoFurry","https://www.sofurry.com/view/779283"],["Writing Dot Dog",""]]],
+
+    //Miscellaneous stories here
+    "that_hard_six":["&ldquo;That Hard Six&rdquo;",[["SoFurry","https://www.sofurry.com/view/680503"]]],
+    "points_east":["&ldquo;Points East&rdquo;",[["SoFurry","https://www.sofurry.com/view/534886"]]],
+    "fieldwork":["&ldquo;Fieldwork&rdquo;",[["SoFurry","https://www.sofurry.com/view/413873"]]],
+    "points_east":["&ldquo;Points East&rdquo;",[["SoFurry","https://www.sofurry.com/view/534886"]]],
+    "young_americans":["&ldquo;Young Americans&rdquo;",[["SoFurry","https://www.sofurry.com/view/830072"]]],
+    "the_milk_of_paradise":["&ldquo;The Milk of Paradise&rdquo;",[["SoFurry","https://www.sofurry.com/view/1356866"]]],
+    "the_hot_equations":["&ldquo;The Hot Equations&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/hot-equations"]]],
+    "straighten_up_and_fly_right":["&ldquo;Straighten Up and Fly Right&rdquo;",[["SoFurry","https://www.sofurry.com/view/1210932"]]],
+    "you_are_leaving_the_american_sector":["&ldquo;You Are Leaving the American Sector&rdquo;",[["SoFurry","https://www.sofurry.com/view/306184"]]],    "keep_the_wings":["&ldquo;Keep the Wings Level and True&rdquo;",[["SoFurry","https://www.sofurry.com/view/1429012"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/keep-wings-level-and-true"]]],
     "reckless":["&ldquo;Reckless&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/reckless"]]],
     "dog_star":["&ldquo;Dog Star&rdquo;",[["SoFurry","https://www.sofurry.com/view/285769"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/dog-star"]]],
     "the_odds":["&ldquo;The Odds&rdquo;",[["SoFurry","https://www.sofurry.com/view/843055"]]],
     "behold_i_send_you_forth":["&ldquo;Behold, I Send You Forth&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/behold-i-send-you-forth"]]],
-    "shantih":["&ldquo;Shantih&rdquo;",[["SoFurry","https://www.sofurry.com/view/1434250"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/shantih"]]],
-    "working_like_a_dog":["&ldquo;Workin' Like a Dog&rdquo;",[["SoFurry","https://www.sofurry.com/view/597929"]]],
-    "monday_morning_rail":["&ldquo;Monday Morning Rail&rdquo;",[["SoFurry","https://www.sofurry.com/view/321538"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/monday-morning-rail"]]],
-    "picture_perfect_memories":["&ldquo;Picture Perfect Memories&rdquo;",[["SoFurry","https://www.sofurry.com/view/1319970"]]],
-    "no_place_like_home":["&ldquo;No Place Like Home for the Holidays&rdquo;",[["SoFurry","https://www.sofurry.com/view/597929"]]],
-    "one_for_the_road":["&ldquo;One More for the Road&rdquo;",[["SoFurry","https://www.sofurry.com/view/966903"]]],
-    "graceland":["&ldquo;Graceland&rdquo;",[["SoFurry","https://www.sofurry.com/view/1373541"]]],
-    "a_few_minutes_of_darkness":["&ldquo;Graceland&rdquo;",[["SoFurry","https://www.sofurry.com/view/1228923"]]],
-    "that_m_word":["&ldquo;That 'M'-Word&rdquo;",[["SoFurry","https://www.sofurry.com/view/753065"]]],
-    "that_hard_six":["&ldquo;That Hard Six&rdquo;",[["SoFurry","https://www.sofurry.com/view/680503"]]],
-    "points_east":["&ldquo;Points East&rdquo;",[["SoFurry","https://www.sofurry.com/view/534886"]]],
-    "fieldwork":["&ldquo;Fieldwork&rdquo;",[["SoFurry","https://www.sofurry.com/view/413873"]]],
-    "bad_dog":["&ldquo;Bad Dog!&rdquo;",[["SoFurry","https://www.sofurry.com/view/316964"]]],
-    "points_east":["&ldquo;Points East&rdquo;",[["SoFurry","https://www.sofurry.com/view/534886"]]],
-    "the_milk_of_paradise":["&ldquo;The Milk of Paradise&rdquo;",[["SoFurry","https://www.sofurry.com/view/1356866"]]],
-    "swinging_on_a_star":["&ldquo;Swingin' On a Star&rdquo;",[["SoFurry","https://www.sofurry.com/view/799867"]]],
-    "hatikvah":["<em>Hatikvah</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=65555"]]],
-	"steel_and_fire_and_stone":["<em>Hatikvah</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=25214"]]],
-	"cry_havoc_1":["<em>Hatikvah</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=19161"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/cry-havoc-chapter-1-and-what-rough-beast"]]],
 }
+
+/* Short story template:
+"NAME":["&ldquo;NAME&rdquo;",[["SoFurry","https://www.sofurry.com/view/000"],["Writing Dot Dog","writingdogurl"]]],
+
+*/
