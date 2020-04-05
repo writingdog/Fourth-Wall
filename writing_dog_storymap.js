@@ -11,6 +11,7 @@ var fw_storymap = {
 	"closure":["&ldquo;Closure&rdquo;",[["SoFurry","https://www.sofurry.com/view/1508521"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/closure"]]],
     "the_trouble_with_coyotes":["<em>The Trouble With Coyotes</em>",[["SoFurry","https://www.sofurry.com/view/1102191"]]],
     "changes":["&ldquo;Changes&rdquo;",[["SoFurry","https://www.sofurry.com/view/1511550"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/changes"]]],
+    "inhibitions":["&ldquo;Inhibitions&rdquo;",[["SoFurry","https://www.sofurry.com/view/1560783"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/inhibitions"]]],
     
     //Star Patrol stories here
     "s1e1":["&ldquo;Last Chances&rdquo;",[["SoFurry","https://www.sofurry.com/view/822973"]]],
