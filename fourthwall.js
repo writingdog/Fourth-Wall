@@ -1,5 +1,5 @@
 "use strict";
-var fw_version_no = "0.66.1";
+var fw_version_no = "0.67.4";
 var fw_story_raw_data;
 var fw_last_changed_frame;
 var fw_story_xml;
@@ -101,7 +101,7 @@ function fw_add_hint_controller() {
 
 	var jump = $("<div />",{"class":"fw_hint_controller_button","text":"\u21ea"});
 	$(jump).css({"right":"6.2em","background-color":"var(--hint_button_jump)"});
-	$(jump).on("click",{arg1:event,arg2:fw_hint_id},function(e) { document.getElementById("fw_hint_inline_"+fw_hint_id).scrollIntoView(); });
+	$(jump).on("click",{arg1:event,arg2:fw_hint_id},function(e) { fw_hint_scroll("#fw_hint_inline_"+e.data.arg2); });
 	
 	var later = $("<div />",{"class":"fw_hint_controller_button","text":">"});
 
@@ -112,14 +112,14 @@ function fw_add_hint_controller() {
 	 */
 	if(fw_hint_id>1) {
 		var n_hint = fw_hint_id-1;
-		$(earlier).on("click",{arg1:event,arg2:n_hint},function(e) { document.getElementById("fw_hint_inline_"+e.data.arg2).scrollIntoView(); fw_do_hint(e.data.arg1,e.data.arg2)});
+		$(earlier).on("click",{arg1:event,arg2:n_hint},function(e) { fw_hint_scroll("#fw_hint_inline_"+e.data.arg2); fw_do_hint(e.data.arg1,e.data.arg2)});
 	}
 	else {
 		$(earlier).css({"background-color":"var(--hint_button_inactive)"});
 	}
 	if(fw_hint_id<(Object.keys(fw_hint_text).length)) {
 		var n_hint = fw_hint_id+1;
-		$(later).on("click",{arg1:event,arg2:n_hint},function(e) { document.getElementById("fw_hint_inline_"+e.data.arg2).scrollIntoView(); fw_do_hint(e.data.arg1,e.data.arg2)});
+		$(later).on("click",{arg1:event,arg2:n_hint},function(e) { fw_hint_scroll("#fw_hint_inline_"+e.data.arg2); fw_do_hint(e.data.arg1,e.data.arg2)});
 	}
 	else {
 		$(later).css({"background-color":"var(--hint_button_inactive)"});
@@ -233,6 +233,15 @@ function fw_do_hint(evt,id) {
 	}
 	// Now append the hint controller.
 	fw_add_hint_controller();
+}
+
+function fw_hint_scroll(id) {
+	/*
+	Scrolls the page to the specified anchor location.
+	*/
+	var ch = parseInt(window.innerHeight / 2);
+	var hint_y = $(id)[0].offsetTop; // The window Y coordinate of the specified hint
+	$("html, body").animate({ scrollTop: (hint_y-ch) },160); // Scroll to the hint position - half the page width, so it should appear in the middle of the page.
 }
 
 function fw_do_hint_fade(id) {
