@@ -1,5 +1,5 @@
 "use strict";
-var fw_version_no = "0.63.15";
+var fw_version_no = "0.66.1";
 var fw_story_raw_data;
 var fw_last_changed_frame;
 var fw_story_xml;
@@ -86,6 +86,51 @@ Returns: a string, containing the source text but with every [[hint text|number]
 	return hint_text;
 }
 
+function fw_add_hint_controller() {
+	if(hint_active==false) {
+		$(".fw_hint_controller").remove();
+		return;
+	}
+	$(".fw_hint_controller").remove();
+	var controller = $("<div />",{"class":"fw_hint_controller"});
+	var earlier = $("<div />",{"class":"fw_hint_controller_button","text":"<"});
+	$(earlier).css({"right":"1.8em"});
+	var close = $("<div />",{"class":"fw_hint_controller_button","text":"x"});
+	$(close).css({"right":"4.2em","background-color":"var(--hint_button_close)"});
+	$(close).on("click",{arg1:event,arg2:fw_hint_id},function(e) { fw_do_hint(e.data.arg1,e.data.arg2)});
+
+	var jump = $("<div />",{"class":"fw_hint_controller_button","text":"\u21ea"});
+	$(jump).css({"right":"6.2em","background-color":"var(--hint_button_jump)"});
+	$(jump).on("click",{arg1:event,arg2:fw_hint_id},function(e) { document.getElementById("fw_hint_inline_"+fw_hint_id).scrollIntoView(); });
+	
+	var later = $("<div />",{"class":"fw_hint_controller_button","text":">"});
+
+	/**
+	 * If we are past hint 1, then we need to add a hint event handler to the earlier button
+	 * 
+	 * If we are before the last hint, then we also need to add a hint event handler to the later button
+	 */
+	if(fw_hint_id>1) {
+		var n_hint = fw_hint_id-1;
+		$(earlier).on("click",{arg1:event,arg2:n_hint},function(e) { document.getElementById("fw_hint_inline_"+e.data.arg2).scrollIntoView(); fw_do_hint(e.data.arg1,e.data.arg2)});
+	}
+	else {
+		$(earlier).css({"background-color":"var(--hint_button_inactive)"});
+	}
+	if(fw_hint_id<(Object.keys(fw_hint_text).length)) {
+		var n_hint = fw_hint_id+1;
+		$(later).on("click",{arg1:event,arg2:n_hint},function(e) { document.getElementById("fw_hint_inline_"+e.data.arg2).scrollIntoView(); fw_do_hint(e.data.arg1,e.data.arg2)});
+	}
+	else {
+		$(later).css({"background-color":"var(--hint_button_inactive)"});
+	}
+	$(controller).append(earlier);
+	$(controller).append(later);
+	$(controller).append(close);
+	$(controller).append(jump);
+	$("#story_wrapper").append(controller)
+}
+
 function fw_do_hint(evt,id) {
 	//console.log(evt);
 	evt.preventDefault();
@@ -105,13 +150,6 @@ function fw_do_hint(evt,id) {
 			}
 			else {
 				for(var i=0;i<smids.length;i++) {
-					var link_string = "<div class=\"fw_interlink_container\">"; // Add a hyperlink for each defined link in the link map
-					for(var j=0;j<fw_storymap[smids[i]][1].length;j++) {
-						link_string += "<a class=\"fw_interlink\" href=\""+fw_storymap[smids[i]][1][j][1]+"\">"+fw_storymap[smids[i]][1][j][0]+"</a>";
-					}
-					link_string += "</div>";
-					// At the conclusion of the for loop, we should have a link string that looks like for example
-					// <a href=$VALID SO FURRY HYPERLINK>SoFurry</a> <a href=$VALID SMASHWORDS LINK>SmashWords</a>
 					var itxt = smids[i]; // This is the story ID ("+moby_dick+") that we're trying to replace.
 					var rtxt = fw_storymap[smids[i]][0];
 					var rq = "";
@@ -120,7 +158,17 @@ function fw_do_hint(evt,id) {
 						rq = "&rdquo;";
 					} // i.e. the story's given title ends with a quote mark. So we strip this for the purposes of replacement.
 					var itr = new RegExp("\\+"+itxt+"\\+"+"([.?!,])?","g");
-					hint_interlink_text = hint_interlink_text.replace(itr,rtxt+"$1"+rq+" "+link_string);
+
+					var link_string = "<div class=\"fw_interlink_container\">"; // Add a hyperlink for each defined link in the link map
+					link_string += rtxt+"$1"+rq+" "; // Insert the story title at the start of the div, so that it will be wrapped appropriately.
+					for(var j=0;j<fw_storymap[smids[i]][1].length;j++) {
+						link_string += "<span class=\"fw_interlink\"><a href=\""+fw_storymap[smids[i]][1][j][1]+"\">"+fw_storymap[smids[i]][1][j][0]+"</a></span>";
+					}
+					link_string += "</div>";
+					// At the conclusion of the for loop, we should have a link string that looks like for example
+					// <a href=$VALID SO FURRY HYPERLINK>SoFurry</a> <a href=$VALID SMASHWORDS LINK>SmashWords</a>
+					
+					hint_interlink_text = hint_interlink_text.replace(itr,link_string);
 				}
 			}
 			$("#hint_textbox").html(hint_interlink_text);
@@ -154,13 +202,6 @@ function fw_do_hint(evt,id) {
 				}
 				else {
 					for(var i=0;i<smids.length;i++) {
-						var link_string = "<div class=\"fw_interlink_container\">"; // Add a hyperlink for each defined link in the link map
-						for(var j=0;j<fw_storymap[smids[i]][1].length;j++) {
-							link_string += "<a class=\"fw_interlink\" href=\""+fw_storymap[smids[i]][1][j][1]+"\">"+fw_storymap[smids[i]][1][j][0]+"</a>";
-						}
-						link_string += "</div>";
-						// At the conclusion of the for loop, we should have a link string that looks like for example
-						// <a href=$VALID SO FURRY HYPERLINK>SoFurry</a> <a href=$VALID SMASHWORDS LINK>SmashWords</a>
 						var itxt = smids[i]; // This is the story ID ("+moby_dick+") that we're trying to replace.
 						var rtxt = fw_storymap[smids[i]][0];
 						var rq = "";
@@ -169,7 +210,16 @@ function fw_do_hint(evt,id) {
 							rq = "&rdquo;";
 						} // i.e. the story's given title ends with a quote mark. So we strip this for the purposes of replacement.
 						var itr = new RegExp("\\+"+itxt+"\\+"+"([.?!,])?","g");
-						hint_interlink_text = hint_interlink_text.replace(itr,rtxt+"$1"+rq+" "+link_string);
+						var link_string = "<div class=\"fw_interlink_container\">"; // Add a hyperlink for each defined link in the link map
+						link_string += rtxt+"$1"+rq+" "; // Insert the story title at the start of the div, so that it will be wrapped appropriately.
+						for(var j=0;j<fw_storymap[smids[i]][1].length;j++) {
+							link_string += "<span class=\"fw_interlink\"><a href=\""+fw_storymap[smids[i]][1][j][1]+"\">"+fw_storymap[smids[i]][1][j][0]+"</a></span>";
+						}
+						link_string += "</div>";
+						// At the conclusion of the for loop, we should have a link string that looks like for example
+						// <a href=$VALID SO FURRY HYPERLINK>SoFurry</a> <a href=$VALID SMASHWORDS LINK>SmashWords</a>
+						
+						hint_interlink_text = hint_interlink_text.replace(itr,link_string);
 						//hint_interlink_text = hint_interlink_text.replace("+"+smids[i]+"+",fw_storymap[smids[i]][0]+" "+link_string);
 					}
 				}
@@ -181,6 +231,8 @@ function fw_do_hint(evt,id) {
 			fw_hint_id=id;
 		}
 	}
+	// Now append the hint controller.
+	fw_add_hint_controller();
 }
 
 function fw_do_hint_fade(id) {
@@ -876,9 +928,7 @@ Story skeleton is initialized by creating a bare div for every unique story sect
 			console.log(e);
 		}
 	});	
-	
-	$("#hint_textbox").click(function() { fw_do_hint(event); });
-	
+		
 	$(fw_story_xml).find("block").each(function() {
 		temp_ids_array.push(parseInt($(this).text()));
 	});

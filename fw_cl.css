@@ -1,3 +1,10 @@
+:root {
+	--hint_button_active: #5fd13d;
+	--hint_button_inactive: #cbf0c0;
+	--hint_button_jump: #07A0C3;
+	--hint_button_close: #e86464;
+}
+
 body {
 	background-color: #094D92;
 	margin: 0px;
@@ -95,13 +102,14 @@ textarea {
 	font-size: 14pt;
 	border: 2px solid black;
 	padding: 10px;
-	position: fixed;
-	/*max-width: 848px;*/
 	max-height: 50%;
+	position:sticky;
+	position:-webkit-sticky;
+	bottom: 3em;
 	overflow-y: auto;
 	left: 8%;
 	right: 8%;
-	bottom: 20px;
+	bottom: 3em;
 	box-sizing: border-box;
 	z-index: 200;
 }
@@ -247,20 +255,48 @@ textarea {
 	margin-right: auto;
 }
 .fw_interlink {
-	font-size: 60%;
 	border: 1px solid black;
 	border-radius: 2px;
 	background-color: white;
-	padding: 1px 10px 1px 10px;
-	margin-right: 5px;
+	padding: .2em 1em .2em 1em;
+	margin-right: .6em;
+	margin-top: .3em;
 	display: inline-block;
 	position: relative;
-	bottom: 10px;
+	bottom: .2em;
+	height: 1.3em;
+	line-height: 1.0em;
+}
+.fw_interlink a {
+	font-size: 60%;
+	line-height: 2em;
+	position: relative;
+	bottom: .3em;
 }
 .fw_interlink_container {
 	display: inline-block;
-	line-height: inherit;
 }
+
+.fw_hint_controller {
+	position: sticky;
+	bottom: .3em;
+	height: 2.5em;
+}
+
+.fw_hint_controller_button {
+	display: block;
+	position: absolute;
+	right: 0em;
+	bottom: 0em;
+	width: 1.6em;
+	height: 1.6em;
+	border: .15em solid black;
+	line-height: 1.3em;
+	text-align: center;
+	border-radius: .3em;
+	background-color: var(--hint_button_active);
+}
+
 @media only screen and (max-width: 720px) {
 	.story_wrapper {
 		margin: 0px;
@@ -276,5 +312,13 @@ textarea {
 		left: 8%;
 		right: 3%;
 		font-size: 10pt;
+		bottom: 4em;
 	}
 }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+	#hint_textbox {
+		 /* Enter your style code */
+		 position:fixed;
+	}
+ }

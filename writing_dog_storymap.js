@@ -12,6 +12,7 @@ var fw_storymap = {
     "the_trouble_with_coyotes":["<em>The Trouble With Coyotes</em>",[["SoFurry","https://www.sofurry.com/view/1102191"]]],
     "changes":["&ldquo;Changes&rdquo;",[["SoFurry","https://www.sofurry.com/view/1511550"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/changes"]]],
     "inhibitions":["&ldquo;Inhibitions&rdquo;",[["SoFurry","https://www.sofurry.com/view/1560783"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/inhibitions"]]],
+    "shore_leave":["&ldquo;Shore Leave&rdquo;",[["SoFurry","https://www.sofurry.com/view/1560783"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/shore-leave"]]],
     
     //Star Patrol stories here
     "s1e1":["&ldquo;Last Chances&rdquo;",[["SoFurry","https://www.sofurry.com/view/822973"]]],
@@ -36,7 +37,7 @@ var fw_storymap = {
     "s4e5":["&ldquo;Agendas&rdquo;",[["SoFurry","https://www.sofurry.com/view/1539089"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s4e5-agendas"]]],
     "s5e1":["&ldquo;Intruders&rdquo;",[["SoFurry","https://www.sofurry.com/view/1547546"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s5e1-intruders"]]],
     "s5e2":["&ldquo;The Home Front&rdquo;",[["SoFurry","https://www.sofurry.com/view/1559633"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s5e2-home-front"]]],
-    "s5e2":["&ldquo;Cultural Exchange&rdquo;",[["SoFurry","https://www.sofurry.com/view/1565103"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s5e3-cultural-exchange"]]],
+    "s5e3":["&ldquo;Cultural Exchange&rdquo;",[["SoFurry","https://www.sofurry.com/view/1565103"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s5e3-cultural-exchange"]]],
     "blinded_by_the_light":["&ldquo;Blinded By the Light&rdquo;",[["SoFurry","https://www.sofurry.com/view/1169594"]]],
     
     //Cannon Shoals stories begin here
@@ -51,7 +52,8 @@ var fw_storymap = {
     "a_few_minutes_of_darkness":["&ldquo;Graceland&rdquo;",[["SoFurry","https://www.sofurry.com/view/1228923"]]],
     "that_m_word":["&ldquo;That 'M'-Word&rdquo;",[["SoFurry","https://www.sofurry.com/view/753065"]]],
     "paleontology_of_regret":["&ldquo;The Paleontology of Regret&rdquo;",[["SoFurry","https://www.sofurry.com/view/1549530"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/paleontology-regret"]]],
-    
+    "through_great_cloudy_skies":["&ldquo;Through Great Cloudy Skies&rdquo;",[["SoFurry","https://www.sofurry.com/view/1568802"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/through-great-cloudy-skies"]]],
+
 
     //Moreauverse stories begin here
     "swinging_on_a_star":["&ldquo;Swingin' On a Star&rdquo;",[["SoFurry","https://www.sofurry.com/view/799867"]]],
@@ -63,9 +65,11 @@ var fw_storymap = {
 
     //Brave New World stories go here
     "there_shall_be_wings":["<em>There Shall Be Wings</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=53225"]]],
+    "high_stakes":["&ldquo;High Stakes&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/high-stakes"],["Bodies in Motion","https://www.sofurry.com/view/975603"]]],
     "irr_1":["&ldquo;Gotta Take It Like You Find It&rdquo;",[["SoFurry","https://www.sofurry.com/view/779283"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/iron-road-running-ch-1-gotta-take-it-you-find-it"]]],
     "irr_2":["&ldquo;Ain't Nothin' But My Hammer&rdquo;",[["SoFurry","https://www.sofurry.com/view/786874"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/iron-road-running-ch2-aint-nothin-my-hammer"]]],
-    "irr_3":["&ldquo;And She's Known Quite Well By All&rdquo;",[["SoFurry","https://www.sofurry.com/view/795042"],["Writing Dot Dog",""]]],
+    "irr_3":["&ldquo;And She's Known Quite Well By All&rdquo;",[["SoFurry","https://www.sofurry.com/view/795042"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/iron-road-running-ch2-and-shes-known-quite-well-all"]]],
+    "irr_4":["&ldquo;Shovel On a Little More Coal&rdquo;",[["SoFurry","https://www.sofurry.com/view/800380"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/iron-road-running-ch-4-shovel-little-more-coal"]]],
     "tn_1":["&ldquo;Storm Warnings&rdquo;",[["SoFurry","https://www.sofurry.com/view/551748"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-1-storm-warnings"]]],
     "tn_2":["&ldquo;A Grey Dawn Breaking&rdquo;",[["SoFurry","https://www.sofurry.com/view/554170"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-2-grey-dawn-breaking"]]],
     "tn_3":["&ldquo;Red Sky at Morning&rdquo;",[["SoFurry","https://www.sofurry.com/view/560248"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-3-red-sky-morning"]]],
