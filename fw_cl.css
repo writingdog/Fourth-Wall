@@ -102,10 +102,7 @@ textarea {
 	font-size: 14pt;
 	border: 2px solid black;
 	padding: 10px;
-	max-height: 50%;
-	position:sticky;
-	position:-webkit-sticky;
-	bottom: 3em;
+	max-height: 50vh;
 	overflow-y: auto;
 	left: 8%;
 	right: 8%;
@@ -277,8 +274,14 @@ textarea {
 	display: inline-block;
 }
 
-.fw_hint_controller {
+#fw_hint_container {
 	position: sticky;
+	bottom: .3em;
+	width: 100%;
+}
+
+.fw_hint_controller {
+	position: relative;
 	bottom: .3em;
 	height: 2.5em;
 }

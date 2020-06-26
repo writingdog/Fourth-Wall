@@ -45,7 +45,7 @@ var fw_storymap = {
     "no_place_like_home":["&ldquo;No Place Like Home for the Holidays&rdquo;",[["SoFurry","https://www.sofurry.com/view/597929"]]],
     "one_for_the_road":["&ldquo;One More for the Road&rdquo;",[["SoFurry","https://www.sofurry.com/view/966903"]]],
     "smalltownlies":["&ldquo;Small-Town Lies&rdquo;",[["SoFurry","https://www.sofurry.com/view/1049718"]]],
-    "friendofthedevil":["&ldquo;Friend of the Devil&rdquo;",[["SoFurry","https://www.sofurry.com/view/1051901"]]],
+    "friend_of_the_devil":["&ldquo;Friend of the Devil&rdquo;",[["SoFurry","https://www.sofurry.com/view/1051901"]]],
     "consequences":["&ldquo;Consequences&rdquo;",[["SoFurry","https://www.sofurry.com/view/1077007"]]],
     "favors":["&ldquo;Favors&rdquo;",[["SoFurry","https://www.sofurry.com/view/1090621"]]],
     "graceland":["&ldquo;Graceland&rdquo;",[["SoFurry","https://www.sofurry.com/view/1373541"]]],
@@ -59,7 +59,7 @@ var fw_storymap = {
     "swinging_on_a_star":["&ldquo;Swingin' On a Star&rdquo;",[["SoFurry","https://www.sofurry.com/view/799867"]]],
     "hatikvah":["<em>Hatikvah</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=65555"]]],
 	"steel_and_fire_and_stone":["<em>Hatikvah</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=25214"]]],
-    "cry_havoc_1":["<em>Hatikvah</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=19161"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/cry-havoc-chapter-1-and-what-rough-beast"]]],
+    "cry_havoc_1":["<em>Cry Havoc!</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=19161"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/cry-havoc-chapter-1-and-what-rough-beast"]]],
     "bad_dog":["&ldquo;Bad Dog!&rdquo;",[["SoFurry","https://www.sofurry.com/view/316964"]]],
     "shantih":["&ldquo;Shantih&rdquo;",[["SoFurry","https://www.sofurry.com/view/1434250"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/shantih"]]],
 

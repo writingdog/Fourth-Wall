@@ -1,5 +1,5 @@
 "use strict";
-var fw_version_no = "0.67.4";
+var fw_version_no = "0.70.0";
 var fw_story_raw_data;
 var fw_last_changed_frame;
 var fw_story_xml;
@@ -128,7 +128,9 @@ function fw_add_hint_controller() {
 	$(controller).append(later);
 	$(controller).append(close);
 	$(controller).append(jump);
-	$("#story_wrapper").append(controller)
+	//var fw_hintbox_height = $("#hint_te")
+	//$(controller).css({"bottom":})
+	$("#fw_hint_container").prepend(controller)
 }
 
 function fw_do_hint(evt,id) {
@@ -826,7 +828,7 @@ ulevel 2: admin
 	
 	xmlHTTP.onreadystatechange = function() {
 		if(xmlHTTP.readyState == 4) {
-			$("#fw_c5connector").remove();
+			//$("#fw_c5connector").remove();
 			var response = JSON.parse(xmlHTTP.responseText);
 			if(response.loggedIn===true) {
 				fw_logged_in_uname = response.username;
@@ -891,7 +893,18 @@ Story skeleton is initialized by creating a bare div for every unique story sect
 	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
 		vars[key] = value;
 	});
-	
+
+	/*
+	 * If the hint container (used for the hint controller) doesn't exist, then we need to create it. 
+	 */
+	if($("#fw_hint_container").length===0) {
+		var hint_container = $("<div />",{"id":"fw_hint_container"});
+		$("#story_wrapper").append(hint_container).ready(function() {
+			$("#hint_textbox").appendTo($("#fw_hint_container"));
+		});
+
+
+	}
 
 	
 	var paragraph_string = $("#fw_default_para").css("background-color").toString();
