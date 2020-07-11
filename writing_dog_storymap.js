@@ -65,6 +65,8 @@ var fw_storymap = {
 
     //Brave New World stories go here
     "there_shall_be_wings":["<em>There Shall Be Wings</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=53225"]]],
+    "the_road_to_mandalay":["<em>The Road to Mandalay</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=35369"]]],
+    "the_valiant_and_the_bold":["<em>The Valiant and the Bold</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=73769"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/valiant-and-bold"]]],
     "high_stakes":["&ldquo;High Stakes&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/high-stakes"],["Bodies in Motion","https://www.sofurry.com/view/975603"]]],
     "irr_1":["&ldquo;Gotta Take It Like You Find It&rdquo;",[["SoFurry","https://www.sofurry.com/view/779283"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/iron-road-running-ch-1-gotta-take-it-you-find-it"]]],
     "irr_2":["&ldquo;Ain't Nothin' But My Hammer&rdquo;",[["SoFurry","https://www.sofurry.com/view/786874"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/iron-road-running-ch2-aint-nothin-my-hammer"]]],
@@ -73,6 +75,9 @@ var fw_storymap = {
     "tn_1":["&ldquo;Storm Warnings&rdquo;",[["SoFurry","https://www.sofurry.com/view/551748"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-1-storm-warnings"]]],
     "tn_2":["&ldquo;A Grey Dawn Breaking&rdquo;",[["SoFurry","https://www.sofurry.com/view/554170"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-2-grey-dawn-breaking"]]],
     "tn_3":["&ldquo;Red Sky at Morning&rdquo;",[["SoFurry","https://www.sofurry.com/view/560248"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-3-red-sky-morning"]]],
+    "tn_4":["&ldquo;Upon the Chaos Dark&rdquo;",[["SoFurry","https://www.sofurry.com/view/1587184"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-4-upon-chaos-dark"]]],
+    "tn_5":["&ldquo;Stars of Different Color&rdquo;",[["SoFurry","https://www.sofurry.com/view/1593400"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-5-stars-different-color"]]],
+    "tn_6":["&ldquo;The Third who Walk&rdquo;",[["SoFurry","https://www.sofurry.com/view/1602188"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-6-third-who-walk"]]],
 
 
     //Miscellaneous stories here
@@ -85,7 +90,8 @@ var fw_storymap = {
     "the_hot_equations":["&ldquo;The Hot Equations&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/hot-equations"]]],
     "straighten_up_and_fly_right":["&ldquo;Straighten Up and Fly Right&rdquo;",[["SoFurry","https://www.sofurry.com/view/1210932"]]],
     "perfidia":["&ldquo;Perfidia&rdquo;",[["SoFurry","https://www.sofurry.com/view/1515851"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/perfidia"]]],
-    "you_are_leaving_the_american_sector":["&ldquo;You Are Leaving the American Sector&rdquo;",[["SoFurry","https://www.sofurry.com/view/306184"]]],    "keep_the_wings":["&ldquo;Keep the Wings Level and True&rdquo;",[["SoFurry","https://www.sofurry.com/view/1429012"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/keep-wings-level-and-true"]]],
+    "you_are_leaving_the_american_sector":["&ldquo;You Are Leaving the American Sector&rdquo;",[["SoFurry","https://www.sofurry.com/view/306184"]]],
+    "keep_the_wings":["&ldquo;Keep the Wings Level and True&rdquo;",[["SoFurry","https://www.sofurry.com/view/1429012"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/keep-wings-level-and-true"]]],
     "reckless":["&ldquo;Reckless&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/reckless"]]],
     "dog_star":["&ldquo;Dog Star&rdquo;",[["SoFurry","https://www.sofurry.com/view/285769"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/dog-star"]]],
     "the_odds":["&ldquo;The Odds&rdquo;",[["SoFurry","https://www.sofurry.com/view/843055"]]],
