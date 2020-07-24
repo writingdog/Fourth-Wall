@@ -1,0 +1,94 @@
+A story object is an XML file containing two parts.
+
+One: METADATA
+
+The <metadata> section contains, at minimum, a <title />, <author />, and <date /> tag. These will be used to populate <div />s in the source HTML with the ids "fw_title" and "fw_author" (the "date" tag is not necessarily used).
+
+<title>A Waste of Desert Sand, Part 2</title>
+<date>May 5th, 2019</date>
+<author>Rob Baird</author>
+
+It also contains any variables used by the Fourth Wall engine, contained within a <variables> block. Each variable has a name and a default value (used when the engine is initialized). For example, Crash Landing contains a "speciesist" variable used to determine how the protagonist feels about moreaus, and an "adult" variable used to determine how smutty the story should play out as:
+
+<variables>
+	<variable>
+		<name>adult</name>
+		<value>50</value>
+	</variable>
+	<variable>
+		<name>speciesist</name>
+		<value>50</value>
+	</variable>
+</variables>
+
+Finally, it contains a list of "hints," which show up as inline text that the reader can click on to see more information about the highlighted text. Each "hint" will be recorded inline in the format [[hint text to be shown inline|#]], where the number following the pipe corresponds to a unique identifier within the hint block. 
+
+<hints>
+	<hint>
+		<id>9</id>
+		<color>#F5ECCE</color>
+		<text>
+		Hebrew for &ldquo;gathering,&rdquo; these are collective settlements fairly common in modern-day Israel.
+		</text>
+		<spoiler />
+	</hint>
+</hints>
+
+In each hint, "id" is a unique identifier corresponding to the inline text, "color" is a hex code for the highlight color to be used for the inline text, and "text" is what will show up when the reader clicks on the hint. If "<spoiler>true</spoiler>" is used (the tag does not have to be used) then special handling will be used for the hint (typically, it will be displayed in a special style).
+
+Two: STORY
+
+The bulk of a Fourth Wall story is bound up in the "<textsections />" block, which consists of between 1 and unlimited <section /> tags. Fourth Wall displays each tag sequentially, based on limitations that are set within each tag. If you are creating a Fourth Wall story manually, the structure will look something like as follows:
+
+<section>
+	<block>700</block>
+	<variant>1</variant>
+	<default>true</default>
+	<destination>800</destination>
+	<requirements>friendly:ge50</requirements>
+	<content>variant A</content>
+	<nudges/>
+</section>
+<section>
+	<block>700</block>
+	<variant>2</variant>
+	<default>false</default>
+	<destination>800</destination>
+	<requirements>friendly:lt50</requirements>
+	<content>variant B</content>
+	<nudges/>
+</section>
+
+To break this down into its components, "block" is part of a set of different text blocks, which can have different variants based on different restrictions. For example, you could have multiple block "700" sections, based on the "friendly" variable as shown here. In case the requirements fail to evaluate, you can set a block as "default:true" so that it will show under fallback scenarios.
+
+In the above example, if the variable "friendly" is greater or equal to 50, than "variant A" will be shown to the reader. Otherwise, the text "variant B" will be shown. Variables can be greater than ("gt"), greater than or equal to ("ge"), less than ("lt"), less than or equal to ("le"), or exactly equal ("eq"). For boolean variables, they may be "false" or "true."
+
+If "destination" is set explicitly, this is the next block that Fourth Wall will jump to (you can use this to skip otherwise-sequential story blocks). Otherwise, it will continue incrementing, searching for section 701, 702, 703, 704, etc. until it finds the next block of sections.
+
+A section can end with a "nudge", which is the method Fourth Wall uses to adjust the variables that direct which text is displayed. Each "nudge" is contained within a "nudges" section. For example:
+
+<nudges>
+	<nudge>
+		<inline>true</inline>
+		<default>true</default>
+		<text>
+		&ldquo;Gee, I&rsquo;m glad you agree.&rdquo; We had a few minutes to wait; rather than getting too comfortable, I let myself stress out a bit by bringing up the diagnostic display for our ship. There wasn&rsquo;t any point in running the automated tests; they all failed immediately.
+		</text>
+		<effect>friendly:+0</effect>
+	</nudge>
+	<nudge>
+		<inline>true</inline>
+		<text>
+		&ldquo;Didn&rsquo;t need your agreement,&rdquo; I snapped. Maybe a little more than I <i>had</i> to, but I wasn&rsquo;t in the mood.<span class=&quot;Apple-converted-space&quot;> </span>
+		</text>
+		<effect>friendly:-10</effect>
+	</nudge>
+</nudges>
+
+Nudges that are set to be "<inline>true</inline>" are displayed as though they were part of the story text, with the version set "<default>true</default>" being rendered using the default font and the others being partly reduced in some way. Nudges that are not set as "inline" are used in more traditional "choose your own adventure" style, e.g.
+
+1. Side with the guard on the left
+2. Side with the guard on the right
+3. Tell the guards you think they *both* lie all the time.
+
+Note that, as with the "content" part of a <section /> tag, the "text" tag of a nudge is rendered as pure HTML, and can include line breaks, formatting, CSS styling and so on.
