@@ -86,7 +86,7 @@ def numnotes():
 	notes = notes + 1
 	return notes
  
-call(["textutil","-convert","html","{}.rtf".format(to),"-output","{}.html".format(to)])
+#call(["textutil","-convert","html","{}.rtf".format(to),"-output","{}.html".format(to)])
 
 with open("{}.html".format(to)) as f:
 	lines = f.readlines()
@@ -96,28 +96,6 @@ lastnotes = {}
 prev_section = "100"
 current_section = "100"
 
-if inline == True:
-	isrc = re.compile("<span class=\"s1\">(.)*<\/span>")
-	slines = []
-	clines = []
-	for line in lines:
-		v = isrc.search(line)
-		if v != None:
-			cargs = v.group(0).split("</span><span class=\"s2\">")
-			line = re.sub(r"<span class=\"s2\">(.*)</span>","",line)
-			line = re.sub(r"<span class=\"s1\">(.*)</span>",r"[[\g<0>]]",line)
-			comment = "<p class=\"p1\">{}</p>".format(cargs[1])
-			comment = string.replace(comment,"[ ","")
-			comment = string.replace(comment,"]</span>","")
-			clines.append(comment)
-			slines.append(line)
-	lines = []
-	for c in clines:
-		lines.append(c)
-	lines.append("<p class=\"p1\">ECB</p>")
-	for s in slines:
-		lines.append(s)
-
 # preprocess section
 
 for i in range(0,int(tt)+3):
@@ -125,6 +103,34 @@ for i in range(0,int(tt)+3):
 	xmlout.write("\t\t\t\t<color>{}</color>\n".format(hintcolor[i]))
 	xmlout.write("\t\t\t\t<text>{}</text>\n\t\t\t</hint>\n".format(hintboiler[i]))
 	comments = comments+1
+
+c_arr = [] # Comments array
+t_arr = [] # Story text array
+
+pca = lines[12][6:8] # Check to try to decide what style is main text and which is comment
+pcb = lines[13][6:8] # Second style declaration should be the one used for footnotes...
+
+for line in lines:
+	if(line[10:12]==pca):
+		line = re.sub("<a id=\"commentlink[0-9]+\"><\/a><a href=\"#comment[0-9]+\">","[[",line)
+		line = re.sub("<a id=\"commentlink[0-9]+\"><\/a><\/i><a href=\"#comment[0-9]+\">","</i>[[",line)
+		line = re.sub("</a>","]]",line)
+		t_arr.append(line)
+	elif(line[10:12]==pcb):
+		line = re.sub("<a id=\"comment[0-9]+\"><\/a><a href=\"#commentlink[0-9]+\">.*<\/a><i>: ","<i>",line)
+		line = re.sub("<a id=\"comment[0-9]+\"><\/a><a href=\"#commentlink[0-9]+\">.*<\/a>: ","",line)
+		line = re.sub("<img src=\"Images.*alt=\"Image\">","",line) # Removing any images included as inline on the export
+		c_arr.append(line)
+
+lines = []
+
+for c in c_arr:
+	lines.append(c)
+lines.append("<p class=\"{}\">ECB</p>".format(pcb))
+for t in t_arr:
+	lines.append(t)
+
+#print(lines)
 
 for line in lines:
 	if(line[:2]=="<p"):
@@ -151,6 +157,10 @@ for line in lines:
 			xmlout.write(line+"\n")
 		else:
 			if done_with_comments == False:
+				line = re.sub(".*\/a&gt;: ","",line)
+				line = re.sub("&lt;a href=&#038;quot;","&lt;a href=\"",line) # Trying to catch a specific problem with hyperlinks
+				line = re.sub("&#038;quot;&gt;","\"&gt;",line) # Trying to catch a specific problem with hyperlinks
+				
 				ldata = line.split("|")
 				if len(ldata) == 1:
 					# This is a special check for if the comment doesn't have a class associated with it.

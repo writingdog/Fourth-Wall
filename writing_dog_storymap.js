@@ -78,6 +78,7 @@ var fw_storymap = {
     "tn_4":["&ldquo;Upon the Chaos Dark&rdquo;",[["SoFurry","https://www.sofurry.com/view/1587184"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-4-upon-chaos-dark"]]],
     "tn_5":["&ldquo;Stars of Different Color&rdquo;",[["SoFurry","https://www.sofurry.com/view/1593400"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-5-stars-different-color"]]],
     "tn_6":["&ldquo;The Third who Walk&rdquo;",[["SoFurry","https://www.sofurry.com/view/1602188"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-6-third-who-walk"]]],
+    "tn_7":["&ldquo;Terra Nova&rdquo;",[["SoFurry","https://www.sofurry.com/view/1621732"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/terra-nova-ch-6-third-who-walk"]]],
 
 
     //Miscellaneous stories here
@@ -99,6 +100,7 @@ var fw_storymap = {
     "bishop_takes_queens_pawn":["&ldquo;Bishop Takes Queen's Pawn&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/bishop-takes-queens-pawn"]]],
     "working_like_a_dog":["&ldquo;Workin' Like a Dog&rdquo;",[["SoFurry","https://www.sofurry.com/view/597929"]]],
     "monday_morning_rail":["&ldquo;Monday Morning Rail&rdquo;",[["SoFurry","https://www.sofurry.com/view/321538"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/monday-morning-rail"]]],
+    "lady_be_good":["&ldquo;Lady Be Good&rdquo;",[["SoFurry","https://www.sofurry.com/view/1610570"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/lady-be-good"]]],
 }
 
 /* Short story template:
