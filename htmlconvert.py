@@ -108,7 +108,17 @@ c_arr = [] # Comments array
 t_arr = [] # Story text array
 
 pca = lines[12][6:8] # Check to try to decide what style is main text and which is comment
-pcb = lines[13][6:8] # Second style declaration should be the one used for footnotes...
+pcbfound = 13
+while pcbfound > 0:
+	if lines[pcbfound].find("text-indent") == -1:
+		pcb = lines[pcbfound][6:8] # Second style declaration should be the one used for footnotes...
+		pcbfound = 0
+	else:
+		pcbfound = pcbfound+1
+	if pcbfound >= 25:
+		pcbfound = -1
+if pcbfound == -1:
+	lines = []
 
 for line in lines:
 	if(line[10:12]==pca):

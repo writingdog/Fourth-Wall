@@ -1,19 +1,12 @@
 :root {
 	--hint_button_active: #5fd13d;
 	--hint_button_inactive: #cbf0c0;
-	--hint_button_jump: #094D92;
+	--hint_button_jump: #07A0C3;
 	--hint_button_close: #e86464;
-	--story_background: #ffffff;
-	--fw_highlight: #094D92;
-	--fw_accent: #2371a3;
-	--fw_select: #10a1ff;
-	--fw_subtle: #1d2c36;
-	--fw_text_normal: #000000;
-	--fw_text_invert: #ffffff;
 }
 
 body {
-	background-color: var(--fw_highlight);
+	background-color: #094D92;
 	margin: 0px;
 	padding: 0px;
 }
@@ -30,13 +23,14 @@ textarea {
 	width: 100%;
 }
 .story_wrapper {
-	border-left: 2.2em solid var(--fw_accent);
-	border-bottom: 50px solid var(--fw_accent);
-	background-color: var(--story_background);
-	padding: 1.2em;
+	border-left: 30px solid #07A0C3;
+	border-bottom: 50px solid #07A0C3;
+	background-color: #FFF1D0;
+	padding: 20px;
 	font-family: "Helvetica",sans-serif;
 	font-weight: 100;
-	color: var(--fw_text_normal);
+	color: black;
+	/*max-width: 800px;*/
 	margin-left: 8%;
 	margin-right: 8%;
 }
@@ -49,12 +43,12 @@ textarea {
 	margin: 3px 0px 0px 0px;
 	padding: 5px;	
 	background-color: white;
-	color: var(--fw_text_normal);
+	color: black;
 }
 .story_paragraph {
 	border: 0px solid grey;
 	margin: 10px 0px 0px 0px;
-	background-color: var(--story_background);
+	background-color: #FFF1D0;
 }
 .story_paragraph,.inline_default {
 	font-size: 14pt;
@@ -69,7 +63,7 @@ textarea {
 	display: block;
 	margin-bottom: 2px;
 	padding: 5px;
-	border: 1px solid var(--fw_subtle);
+	border: 1px solid grey;
 }
 .inline_choice {
 	text-indent: 0px;
@@ -80,30 +74,42 @@ textarea {
 }
 .nudge_choice {
 	display: block;
-	background-color: var(--fw_accent);
-	padding: .8em;
+	background-color: #07A0C3;
+	padding: 3px;
 	font-style: italic;
 	font-size: smaller;
 	text-align: center;
-	color: var(--fw_text_invert);
+	color: white;
 }
 .nudge_choice:hover {
 	font-weight: bold;
-	background-color: var(--fw_select);
-	color: var(--fw_text_invert);
+	background-color: #DD1C1A;
+	color: #fff;
 	opacity: 1;
 	moz-opacity: 1;
 }
 .inline_choice:hover {
 	font-size: 14pt;
-	background-color: var(--fw_select);
-	color: var(--fw_text_invert);
+	background-color: #07A0C3;
+	color: #ffffff;
 	opacity: 1;
 	moz-opacity: 1;
 	line-height: 18pt;
 	text-indent: 32px;	
 }
-
+#hint_textbox {
+	display: none;
+	font-size: 14pt;
+	border: 2px solid black;
+	padding: 10px;
+	max-height: 50vh;
+	overflow-y: auto;
+	left: 8%;
+	right: 8%;
+	bottom: 3em;
+	box-sizing: border-box;
+	z-index: 200;
+}
 .fw_hint:hover {	
 	border: 1px dotted black;	
 	text-decoration: underline;
@@ -154,7 +160,7 @@ textarea {
 	width: 16px;
 	height: 16px;
 	border: 1px solid white;
-	background-color: var(--hint_button_close);
+	background-color: #FA5858;
 	text-align: center;
 	vertical-align: center;
 }
@@ -183,8 +189,8 @@ textarea {
 	height: 16px;
 }
 .comment_box,.private_comment_box {
-	background-color: var(--story_background);
-	border: 1px solid var(--fw_accent);
+	background-color: #FFF1D0;
+	border: 1px solid #07A0C3;
 	list-style-type: none;
 	list-style-position: outside;
 	margin-left: -40px;
@@ -268,37 +274,15 @@ textarea {
 	display: inline-block;
 }
 
-/*
-
-THIS IS FOR THE HINT CONTAINER AND IT'S CONTROLLING BUTTONS
-
-*/
-
 #fw_hint_container {
 	position: sticky;
 	bottom: .3em;
 	width: 100%;
-	min-height: 9em;
-	display: none;
-}
-
-#hint_textbox {
-	display: none;
-	font-size: 14pt;
-	border: .15em solid black;
-	border-radius: .3em;
-	padding: 10px;
-	max-height: 50vh;
-	overflow-y: auto;
-	box-sizing: border-box;
-	z-index: 200;
-	position: absolute;
-	bottom: .6em;
 }
 
 .fw_hint_controller {
-	position: absolute;
-	left: -1.4em;
+	position: relative;
+	bottom: .3em;
 	height: 2.5em;
 }
 
@@ -314,36 +298,12 @@ THIS IS FOR THE HINT CONTAINER AND IT'S CONTROLLING BUTTONS
 	text-align: center;
 	border-radius: .3em;
 	background-color: var(--hint_button_active);
-	background-size: 100%;
-}
-
-#fw_hint_controller_previous_comment {
-	background-image: url("./fw_icons_previous_comment.svg");
-	top: 4.4em;
-}
-
-#fw_hint_controller_next_comment {
-	background-image: url("./fw_icons_next_comment.svg");
-	top: 6.3em;
-}
-
-#fw_hint_controller_jump_to_position {
-	background-image: url("./fw_icons_jump_to_position.svg");
-	top: 0em;
-	background-color: var(--hint_button_jump);
-}
-
-#fw_hint_controller_close_comment {
-	background-image: url("./fw_icons_close_comment.svg");
-	top: 2em;
-	background-color: var(--hint_button_close);
 }
 
 @media only screen and (max-width: 720px) {
 	.story_wrapper {
 		margin: 0px;
-		padding: 1.5em;
-		border-left: 2.5em solid var(--fw_accent);
+		padding: 32px;
 	}
 	.story_wrapper img {
 		max-height: 250px;
@@ -351,30 +311,11 @@ THIS IS FOR THE HINT CONTAINER AND IT'S CONTROLLING BUTTONS
 	.story_paragraph, .inline_default {
 		font-size: 12pt;
 	}
-	#fw_hint_container {
-		min-height: 10em;
-	}
 	#hint_textbox {
+		left: 8%;
+		right: 3%;
 		font-size: 10pt;
-		bottom: .75em;
-	}
-	.fw_hint_controller {
-		left: -1.5em;
-	}
-	.fw_hint_controller_button {
-		width: 2em;
-		height: 2em;
-	}
-	#fw_hint_controller_previous_comment {
-		top: 4.8em;
-	}
-	
-	#fw_hint_controller_next_comment {
-		top: 7.1em;
-	}
-	
-	#fw_hint_controller_close_comment {
-		top: 2.2em;
+		bottom: 4em;
 	}
 }
 

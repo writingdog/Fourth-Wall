@@ -1,5 +1,5 @@
 "use strict";
-var fw_version_no = "0.70.0";
+var fw_version_no = "0.82.0";
 var fw_story_raw_data;
 var fw_last_changed_frame;
 var fw_story_xml;
@@ -33,21 +33,28 @@ var fw_cancel_char = "\u274c";
 var fw_post_comment_char = "&#128172;";
 var fw_post_comment_restricted_char = "&#128173;";
 var fw_api_path = "/fourthwall/";
+var fw_offline_mode = false; // Disable story and comment loads.
 
 
 function fw_load_story(filename) {
-	var xmlHTTP = new XMLHttpRequest();
-	try {
-		xmlHTTP.open("GET",filename,false);
-		xmlHTTP.send(null);
+	if(fw_offline_mode==false) {
+		var xmlHTTP = new XMLHttpRequest();
+		try {
+			xmlHTTP.open("GET",filename,false);
+			xmlHTTP.send(null);
+		}
+		catch (e) {
+			window.alert("Unable to load the story object.");
+			window.alert(e);
+			return;
+		}
+		fw_story_raw_data = xmlHTTP.responseText;
+		fw_story_xml = $.parseXML(fw_story_raw_data);
 	}
-	catch (e) {
-		window.alert("Unable to load the story object.");
-		window.alert(e);
-		return;
+	else {
+		fw_story_raw_data = fw_offline_xml.replace(/\[n\]/g,"\n");
+		fw_story_xml = $.parseXML(fw_story_raw_data);
 	}
-	fw_story_raw_data = xmlHTTP.responseText;
-	fw_story_xml = $.parseXML(fw_story_raw_data);
 }
 
 function fw_add_hints(text) {
@@ -93,17 +100,18 @@ function fw_add_hint_controller() {
 	}
 	$(".fw_hint_controller").remove();
 	var controller = $("<div />",{"class":"fw_hint_controller"});
-	var earlier = $("<div />",{"class":"fw_hint_controller_button","text":"<"});
-	$(earlier).css({"right":"1.8em"});
-	var close = $("<div />",{"class":"fw_hint_controller_button","text":"x"});
-	$(close).css({"right":"4.2em","background-color":"var(--hint_button_close)"});
+	var earlier = $("<div />",{"class":"fw_hint_controller_button","id":"fw_hint_controller_previous_comment","alt":"Go to previous comment"});
+	//$(earlier).css({"right":"1.8em"});
+	var close = $("<div />",{"class":"fw_hint_controller_button","id":"fw_hint_controller_close_comment","alt":"Close comment"});
+	//$(close).css({"right":"4.2em","background-color":"var(--hint_button_close)"});
 	$(close).on("click",{arg1:event,arg2:fw_hint_id},function(e) { fw_do_hint(e.data.arg1,e.data.arg2)});
 
-	var jump = $("<div />",{"class":"fw_hint_controller_button","text":"\u21ea"});
-	$(jump).css({"right":"6.2em","background-color":"var(--hint_button_jump)"});
+	var jump = $("<div />",{"class":"fw_hint_controller_button","id":"fw_hint_controller_jump_to_position","alt":"See position in story"});
+	//$(jump).css({"right":"6.2em","background-color":"var(--hint_button_jump)"});
+	$(jump).css({"background-color":fw_hint_colors[fw_hint_id]});
 	$(jump).on("click",{arg1:event,arg2:fw_hint_id},function(e) { fw_hint_scroll("#fw_hint_inline_"+e.data.arg2); });
 	
-	var later = $("<div />",{"class":"fw_hint_controller_button","text":">"});
+	var later = $("<div />",{"class":"fw_hint_controller_button","id":"fw_hint_controller_next_comment","alt":"Go to next comment"});
 
 	/**
 	 * If we are past hint 1, then we need to add a hint event handler to the earlier button
@@ -142,7 +150,7 @@ function fw_do_hint(evt,id) {
 		// New block in FW 0.50 : When a hint is selected, this fades the background for all OTHER hints.
 		fw_do_hint_fade(id);
 		// End new block.
-		$("#hint_textbox").show();
+		$("#hint_textbox,#fw_hint_container").show();
 		if(fw_hint_interlink[id]===true) {
 			// New in FW 0.60: Story interlink handling.
 			var smids = Object.keys(fw_storymap); // This should be defined in a separate, included file.
@@ -183,7 +191,7 @@ function fw_do_hint(evt,id) {
 	}
 	else {
 		if(id===undefined || id===fw_hint_id) {
-			$("#hint_textbox").fadeOut();
+			$("#hint_textbox,#fw_hint_container").fadeOut();
 			fw_hint_id="";
 			// New block in FW 0.50 : When a hint is selected, this fades the background for all OTHER hints.
 			fw_do_hint_fade();
@@ -420,39 +428,71 @@ function fw_comments_load() {
 	fw_comments = {};
 	var fw_comment_rawxml = "";
 	var fw_comment_xml;
-	var xmlHTTP = new XMLHttpRequest();
-	try {
-		xmlHTTP.open("GET", fw_api_path+"fw_read_comments.php?story="+fw_story_name+"&author="+fw_logged_in_uname,false);
-		xmlHTTP.onreadystatechange = function () {
-			if(xmlHTTP.readyState == 4 && xmlHTTP.status == 200) {
-				fw_comment_rawxml = xmlHTTP.responseText;
-				fw_comment_xml = $.parseXML(fw_comment_rawxml);
-				$(fw_comment_xml).find("comment").each(function () {
-					var okay_to_load = true;
-					if($(this).find("private").text()==1) {
-						okay_to_load = false;
-						if(fw_admin_logged_in==true || $(this).find("author").text() == fw_logged_in_uname) {
-							okay_to_load = true;
+	if(fw_offline_mode==false) {
+		/*
+		 *	Execute this only if Fourth Wall is not running in local mode. 
+		 */
+		var xmlHTTP = new XMLHttpRequest();
+		try {
+			xmlHTTP.open("GET", fw_api_path+"fw_read_comments.php?story="+fw_story_name+"&author="+fw_logged_in_uname,false);
+			xmlHTTP.onreadystatechange = function () {
+				if(xmlHTTP.readyState == 4 && xmlHTTP.status == 200) {
+					fw_comment_rawxml = xmlHTTP.responseText;
+					fw_comment_xml = $.parseXML(fw_comment_rawxml);
+					$(fw_comment_xml).find("comment").each(function () {
+						var okay_to_load = true;
+						if($(this).find("private").text()==1) {
+							okay_to_load = false;
+							if(fw_admin_logged_in==true || $(this).find("author").text() == fw_logged_in_uname) {
+								okay_to_load = true;
+							}
 						}
-					}
-					if(okay_to_load==true) {
-						if(fw_comments[$(this).find("id").text()]===undefined) {
-							fw_comments[$(this).find("id").text()] = [[$(this).find("author").text(),$(this).find("text").text(),$(this).find("uid").text(),$(this).find("private").text()]];
+						if(okay_to_load==true) {
+							if(fw_comments[$(this).find("id").text()]===undefined) {
+								fw_comments[$(this).find("id").text()] = [[$(this).find("author").text(),$(this).find("text").text(),$(this).find("uid").text(),$(this).find("private").text()]];
+							}
+							else {
+								fw_comments[$(this).find("id").text()].push([$(this).find("author").text(),$(this).find("text").text(),$(this).find("uid").text(),$(this).find("private").text()]);
+							}
 						}
-						else {
-							fw_comments[$(this).find("id").text()].push([$(this).find("author").text(),$(this).find("text").text(),$(this).find("uid").text(),$(this).find("private").text()]);
-						}
-					}
-				});
-				fw_updatecomments();
+					});
+					fw_updatecomments();
+				}
 			}
+			xmlHTTP.send(null);
 		}
-		xmlHTTP.send(null);
+		catch (e) {
+			window.alert("Unable to load the requested file");
+			return;
+		}
 	}
-	catch (e) {
-		window.alert("Unable to load the requested file");
-		return;
+	else {
+/**
+ * If running in local mode, use a dummy comment block.
+ */
+		fw_comment_rawxml = fw_offline_comment;
+		fw_comment_xml = $.parseXML(fw_comment_rawxml);
+		$(fw_comment_xml).find("comment").each(function () {
+			console.log(this);
+			var okay_to_load = true;
+			if($(this).find("private").text()==1) {
+				okay_to_load = false;
+				if(fw_admin_logged_in==true || $(this).find("author").text() == fw_logged_in_uname) {
+					okay_to_load = true;
+				}
+			}
+			if(okay_to_load==true) {
+				if(fw_comments[$(this).find("id").text()]===undefined) {
+					fw_comments[$(this).find("id").text()] = [[$(this).find("author").text(),$(this).find("text").text(),$(this).find("uid").text(),$(this).find("private").text()]];
+				}
+				else {
+					fw_comments[$(this).find("id").text()].push([$(this).find("author").text(),$(this).find("text").text(),$(this).find("uid").text(),$(this).find("private").text()]);
+				}
+			}
+		});
+		fw_updatecomments();
 	}
+	
 }
 
 function fw_comments_delete(uid,id) {
@@ -824,50 +864,58 @@ ulevel 0: not logged in
 ulevel 1: normal user
 ulevel 2: admin
 */
-	var xmlHTTP = new XMLHttpRequest();
+	if(fw_offline_mode==false) {
+		var xmlHTTP = new XMLHttpRequest();
 	
-	xmlHTTP.onreadystatechange = function() {
-		if(xmlHTTP.readyState == 4) {
-			//$("#fw_c5connector").remove();
-			var response = JSON.parse(xmlHTTP.responseText);
-			if(response.loggedIn===true) {
-				fw_logged_in_uname = response.username;
-				if(response.ulevel===2) {
-					fw_admin_logged_in = true;
+		xmlHTTP.onreadystatechange = function() {
+			if(xmlHTTP.readyState == 4) {
+				//$("#fw_c5connector").remove();
+				var response = JSON.parse(xmlHTTP.responseText);
+				if(response.loggedIn===true) {
+					fw_logged_in_uname = response.username;
+					if(response.ulevel===2) {
+						fw_admin_logged_in = true;
+					}
+				}
+				if(fw_print_version==false) {
+					try {
+						fw_comments_load();
+					}
+					catch(e) {
+						alert(e);
+					}
 				}
 			}
-			if(fw_print_version==false) {
-				try {
-					fw_comments_load();
-				}
-				catch(e) {
-					alert(e);
-				}
+		};
+		
+		if($("#fw_c5connector").length==0) {
+			try {
+				xmlHTTP.open("GET",fw_api_path+"fw_user.php?mode=0");
+				xmlHTTP.send(null);
+			}
+			catch (e) {
+				window.alert(e)
+				return;
 			}
 		}
-	};
-	
-	if($("#fw_c5connector").length==0) {
-		try {
-			xmlHTTP.open("GET",fw_api_path+"fw_user.php?mode=0");
-			xmlHTTP.send(null);
-		}
-		catch (e) {
-			window.alert(e)
-			return;
+		else {
+			try {
+					
+				xmlHTTP.open("GET",fw_api_path+"fw_user.php?mode=1&uid="+$("#fw_c5connector").val());
+				xmlHTTP.send(null);
+			}
+			catch (e) {
+				window.alert(e)
+				return;
+			}
 		}
 	}
 	else {
-		try {
-				
-			xmlHTTP.open("GET",fw_api_path+"fw_user.php?mode=1&uid="+$("#fw_c5connector").val());
-			xmlHTTP.send(null);
-		}
-		catch (e) {
-			window.alert(e)
-			return;
-		}
+		fw_logged_in_uname = "rob";
+		fw_admin_logged_in = true;
+		fw_comments_load();
 	}
+	
 	
 	//var response = JSON.parse(xmlHTTP.responseText);
 
@@ -893,6 +941,12 @@ Story skeleton is initialized by creating a bare div for every unique story sect
 	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
 		vars[key] = value;
 	});
+
+	if(vars["offline"]!=undefined) {
+		if(vars["offline"]=="true") {
+			fw_offline_mode = true; // This disables calls to remote functions. Used for style testing.
+		}
+	}
 
 	/*
 	 * If the hint container (used for the hint controller) doesn't exist, then we need to create it. 
@@ -999,9 +1053,6 @@ Story skeleton is initialized by creating a bare div for every unique story sect
 			var spacer_div = $("<div />",{"class":"fw_tag_spacer"});
 			$("#story_wrapper").prepend(spacer_div);
 			$("#story_wrapper").prepend(new_ccm_row);
-		}
-		else {
-			console.log($(".ccm-block-tags-wrapper"));
 		}
 	
 		$("#fw_title").html("&ldquo;"+fw_story_title+"&rdquo;");

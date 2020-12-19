@@ -38,6 +38,8 @@ var fw_storymap = {
     "s5e1":["&ldquo;Intruders&rdquo;",[["SoFurry","https://www.sofurry.com/view/1547546"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s5e1-intruders"]]],
     "s5e2":["&ldquo;The Home Front&rdquo;",[["SoFurry","https://www.sofurry.com/view/1559633"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s5e2-home-front"]]],
     "s5e3":["&ldquo;Cultural Exchange&rdquo;",[["SoFurry","https://www.sofurry.com/view/1565103"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s5e3-cultural-exchange"]]],
+    "s5e4":["&ldquo;The Mission&rdquo;",[["SoFurry","https://www.sofurry.com/view/1629877"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s5e4-mission"]]],
+    "s5e5":["&ldquo;Adaptations&rdquo;",[["SoFurry","https://www.sofurry.com/view/1642086"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s5e4-adaptations"]]],
     "blinded_by_the_light":["&ldquo;Blinded By the Light&rdquo;",[["SoFurry","https://www.sofurry.com/view/1169594"]]],
     
     //Cannon Shoals stories begin here
