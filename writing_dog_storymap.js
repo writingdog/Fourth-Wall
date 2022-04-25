@@ -41,6 +41,10 @@ var fw_storymap = {
     "s5e4":["&ldquo;The Mission&rdquo;",[["SoFurry","https://www.sofurry.com/view/1629877"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s5e4-mission"]]],
     "s5e5":["&ldquo;Adaptations&rdquo;",[["SoFurry","https://www.sofurry.com/view/1642086"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s5e4-adaptations"]]],
     "blinded_by_the_light":["&ldquo;Blinded By the Light&rdquo;",[["SoFurry","https://www.sofurry.com/view/1169594"]]],
+    "s6e1":["&ldquo;Curiouser...&rdquo;",[["SoFurry","https://www.sofurry.com/view/1642086"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s6e1-curiouser"]]],
+    "s6e2":["&ldquo;...and Curiouser&rdquo;",[["SoFurry","https://www.sofurry.com/view/1789563"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s6e2-and-curiouser"]]],
+    "s6e3":["&ldquo;The Witch&rdquo;",[["SoFurry","https://www.sofurry.com/view/1828038"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/s6e3-witch"]]],
+
     
     //Cannon Shoals stories begin here
     "picture_perfect_memories":["&ldquo;Picture Perfect Memories&rdquo;",[["SoFurry","https://www.sofurry.com/view/1319970"]]],
@@ -55,21 +59,36 @@ var fw_storymap = {
     "that_m_word":["&ldquo;That 'M'-Word&rdquo;",[["SoFurry","https://www.sofurry.com/view/753065"]]],
     "paleontology_of_regret":["&ldquo;The Paleontology of Regret&rdquo;",[["SoFurry","https://www.sofurry.com/view/1549530"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/paleontology-regret"]]],
     "through_great_cloudy_skies":["&ldquo;Through Great Cloudy Skies&rdquo;",[["SoFurry","https://www.sofurry.com/view/1568802"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/through-great-cloudy-skies"]]],
-
+	"count_every_beautiful_thing":["&ldquo;Count Every Beautiful Thing&rquo;",[["SoFurry","https://www.sofurry.com/view/753065"],["Writing Dot Dog","https://www.sofurry.com/view/753065"]]],
 
     //Moreauverse stories begin here
+    "workin_like_a_dog":["&ldquo;Workin' Like a Dog&rdquo;",[["SoFurry","https://www.sofurry.com/view/597929"]]],
     "swinging_on_a_star":["&ldquo;Swingin' On a Star&rdquo;",[["SoFurry","https://www.sofurry.com/view/799867"]]],
     "hatikvah":["<em>Hatikvah</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=65555"]]],
+    "crucible":["<em>Crucible</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=81298"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/crucible"]]],
 	"steel_and_fire_and_stone":["<em>Hatikvah</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=25214"]]],
     "cry_havoc_1":["<em>Cry Havoc!</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=19161"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/cry-havoc-chapter-1-and-what-rough-beast"]]],
     "bad_dog":["&ldquo;Bad Dog!&rdquo;",[["SoFurry","https://www.sofurry.com/view/316964"]]],
     "shantih":["&ldquo;Shantih&rdquo;",[["SoFurry","https://www.sofurry.com/view/1434250"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/shantih"]]],
+    "and_to_you_your_wassail":["&ldquo;And to You Your Wassail&rdquo;",[["SoFurry","https://www.sofurry.com/view/1525623"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/and-you-your-wassail"]]],
+    "crucible_1":["<em>Crucible</em>, Part 1",[["SoFurry","https://www.sofurry.com/view/1708147"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/crucible-part-1"]]],
+    "crucible_2":["<em>Crucible</em>, Part 2",[["SoFurry","https://www.sofurry.com/view/1717904"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/crucible-part-2"]]],
+    "crucible_3":["<em>Crucible</em>, Part 3",[["SoFurry","https://www.sofurry.com/view/1717906"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/crucible-part-3"]]],
+    "crucible_4":["<em>Crucible</em>, Part 4",[["SoFurry","https://www.sofurry.com/view/1744109"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/crucible-part-4"]]],
+    "crucible_5":["<em>Crucible</em>, Part 5",[["SoFurry","https://www.sofurry.com/view/1744109"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/crucible-part-5"]]],
+    "crucible_6":["<em>Crucible</em>, Part 6",[["SoFurry","https://www.sofurry.com/view/1744109"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/crucible-part-6"]]],
+    "crucible_7":["<em>Crucible</em>, Part 7",[["SoFurry","https://www.sofurry.com/view/1779234"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/crucible-part-7"]]],
+    "crucible_8":["<em>Crucible</em>, Part 8",[["SoFurry","https://www.sofurry.com/view/1779234"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/crucible-part-8"]]],
+    "crucible_9":["<em>Crucible</em>, Part 9",[["SoFurry","https://www.sofurry.com/view/1782969"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/crucible-part-9"]]],
+
+
 
     //Brave New World stories go here
     "there_shall_be_wings":["<em>There Shall Be Wings</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=53225"]]],
     "the_road_to_mandalay":["<em>The Road to Mandalay</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=35369"]]],
     "the_valiant_and_the_bold":["<em>The Valiant and the Bold</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=73769"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/valiant-and-bold"]]],
     "high_stakes":["&ldquo;High Stakes&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/high-stakes"],["Bodies in Motion","https://www.sofurry.com/view/975603"]]],
+    "an_iron_road_running":["<em>An Iron Road Running</em>",[["SoFurry","https://www.sofurry.com/browse/folder/stories?by=123686&folder=40725"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/iron-road-running"]]],
     "irr_1":["&ldquo;Gotta Take It Like You Find It&rdquo;",[["SoFurry","https://www.sofurry.com/view/779283"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/iron-road-running-ch-1-gotta-take-it-you-find-it"]]],
     "irr_2":["&ldquo;Ain't Nothin' But My Hammer&rdquo;",[["SoFurry","https://www.sofurry.com/view/786874"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/iron-road-running-ch2-aint-nothin-my-hammer"]]],
     "irr_3":["&ldquo;And She's Known Quite Well By All&rdquo;",[["SoFurry","https://www.sofurry.com/view/795042"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/iron-road-running-ch2-and-shes-known-quite-well-all"]]],
@@ -95,6 +114,7 @@ var fw_storymap = {
     "perfidia":["&ldquo;Perfidia&rdquo;",[["SoFurry","https://www.sofurry.com/view/1515851"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/perfidia"]]],
     "you_are_leaving_the_american_sector":["&ldquo;You Are Leaving the American Sector&rdquo;",[["SoFurry","https://www.sofurry.com/view/306184"]]],
     "keep_the_wings":["&ldquo;Keep the Wings Level and True&rdquo;",[["SoFurry","https://www.sofurry.com/view/1429012"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/keep-wings-level-and-true"]]],
+    "keep_the_wings_level_and_true":["&ldquo;Keep the Wings Level and True&rdquo;",[["SoFurry","https://www.sofurry.com/view/1429012"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/keep-wings-level-and-true"]]],
     "reckless":["&ldquo;Reckless&rdquo;",[["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/reckless"]]],
     "dog_star":["&ldquo;Dog Star&rdquo;",[["SoFurry","https://www.sofurry.com/view/285769"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/dog-star"]]],
     "the_odds":["&ldquo;The Odds&rdquo;",[["SoFurry","https://www.sofurry.com/view/843055"]]],
@@ -103,7 +123,15 @@ var fw_storymap = {
     "working_like_a_dog":["&ldquo;Workin' Like a Dog&rdquo;",[["SoFurry","https://www.sofurry.com/view/597929"]]],
     "monday_morning_rail":["&ldquo;Monday Morning Rail&rdquo;",[["SoFurry","https://www.sofurry.com/view/321538"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/monday-morning-rail"]]],
     "lady_be_good":["&ldquo;Lady Be Good&rdquo;",[["SoFurry","https://www.sofurry.com/view/1610570"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/lady-be-good"]]],
+    "if_only_in_my_dreams":["&ldquo;If Only In My Dreams&rdquo;",[["SoFurry","https://www.sofurry.com/view/1664437"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/if-only-my-dreams"]]],
+    "how_high_the_moon":["&ldquo;How High the Moon&rdquo;",[["SoFurry","https://www.sofurry.com/view/1685075"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/how-high-moon"]]],
+    "how_high_the_moon_2":["&ldquo;How High the Moon, Part II&rdquo;",[["SoFurry","https://www.sofurry.com/view/1767206"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/how-high-moon-part-2"]]],
+    "sweet_escape":["&ldquo;Sweet Escape&rdquo;",[["SoFurry","https://www.sofurry.com/view/1726700"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/wouldnt-it-be-sweet"]]],
+    "getting_a_physical":["&ldquo;Getting a Physical&rdquo;",[["SoFurry","https://www.sofurry.com/view/1584522"],["Writing Dot Dog","https://www.writing.dog/index.php/writing-overview/library/getting-physical"]]],
+
 }
+
+
 
 /* Short story template:
 "NAME":["&ldquo;NAME&rdquo;",[["SoFurry","SOFURRYURL"],["Writing Dot Dog","writingdogurl"]]],

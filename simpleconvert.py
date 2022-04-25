@@ -18,14 +18,31 @@ ts = "INSERT SUMMARY HERE."
 te = "INSERT EXTENDED SUMMARY HERE" # extended summary (2/s)
 #td = "July 6th, 2015"
 tv = "<variables />\n"
+tdr = "" # Draft text.
 tstring = ""
 inline = False # Does this story have comments inline or not?
+draft = False # Should the story be handled as though it was a draft (i.e. does not have FW comments?)
+comments = 1 # Counter for how many comments / FW notes the story hsa
+done_with_comments = False # Set when the "ECB" line is found in the RTF file, or if the story is a draft
+cleanup = False # If so, delete extraneous files
+lastnotes = {}
+prev_section = "100"
+current_section = "100"
 
 for arg in sys.argv:
 	asubs = arg.split("=")
 	if asubs[0] == "--name":
 		to = asubs[1]
 		print(to)
+	elif asubs[0] == "--draft":
+		if asubs[1] == "1":
+			tdr = "This is a first draft, so it's complete but likely to be changed. It does not include notes or commentary."
+		elif asubs[1] == "2":
+			tdr = "This is a second draft (or a story that has been worked on repeatedly) so probably more or less final. It does not include notes or commentary."
+		else:
+			tdr = "This is an incomplete draft. So there might be missing pieces and things are likely to change about it. Read at your own... risk? (It is not risky)"
+		draft = True
+		cleanup = True
 	elif asubs[0] == "--adult":
 		if asubs[1] == "0":
 			tl = "Clean."
@@ -70,6 +87,8 @@ if tt=="1":
 	intro = "&lt;i&gt;While reading this story, you will occasionally see highlighted text that you can click on. There are four kinds here: [[explanatory notes]], [[story interlinks]], [[behind the scenes commentary]], and [[translations]]. I hope that this is helpful to you in getting the most out of this story :) Enjoy!&lt;/i&gt;"
 else:
 	intro = "&lt;i&gt;While reading this story, you will occasionally see highlighted text that you can click on. There are three kinds here: [[worldbuilding notes]], [[story interlinks]] and [[behind the scenes commentary]]. I hope that this is helpful to you in getting the most out of this story :) Enjoy!&lt;/i&gt;"
+if draft==True:
+	intro =""
 
 xmlout = open("{}.xml".format(to),"w")
 htmlout = open("{}_processed.html".format(to),"w")
@@ -90,11 +109,6 @@ call(["textutil","-convert","html","{}.rtf".format(to),"-output","{}.html".forma
 
 with open("{}.html".format(to)) as f:
 	lines = f.readlines()
-comments = 1
-done_with_comments = False
-lastnotes = {}
-prev_section = "100"
-current_section = "100"
 
 if inline == True:
 	isrc = re.compile("<span class=\"s1\">(.)*<\/span>")
@@ -144,11 +158,12 @@ for line in lines:
 		line = string.replace(line,"'","&#038;apos;")
 		line = string.replace(line,"<","&lt;")
 		line = string.replace(line,">","&gt;")
-		if(line=="ECB"):
+		if(line=="ECB" or draft==True):
 			done_with_comments = True
 			xmlout.write("\t\t</hints>\n\t</metadata>\n\t<comments />\n\t<textsections>\n\t\t<section>\n\t\t\t<block>100</block>\n\t\t\t<variant>1</variant>\n\t\t\t<default>true</default>\n\t\t\t<destination>200</destination>\n\t\t\t<requirements />\n\t\t\t<content>")
 			line = re.sub(r"(]])",lambda m : "|{}{}".format(numnotes(),m.group(1)),intro);
 			xmlout.write(line+"\n")
+			draft = False
 		else:
 			if done_with_comments == False:
 				ldata = line.split("|")
@@ -237,9 +252,17 @@ for line in lines:
 						htmlout.write("<p>&lt;p&gt;{}&lt;/p&gt;</p>\n".format(line_html))
 						txtout.write("{}\n\n".format(line_txt))
 #print(lastnotes)
-print("{} {} First posted {}. Includes notes{} and commentary.".format(ts,tl,td,tstring))
+if cleanup == True:
+	# We use cleanup instead of "draft" because of the earlier hack that unsets "draft"\
+	print("{} {} First posted {}. {}".format(ts,tl,td,tdr))
+	call(["rm","{}_processed.html".format(to)])
+	call(["rm","{}_fa.txt".format(to)])
+else:
+	print("{} {} First posted {}. Includes notes{} and commentary.".format(ts,tl,td,tstring))
 xmlout.write("\t\t\t</content>\n\t\t\t<nudges />\n\t\t</section>\n\t</textsections>\n</content>")
 
 xmlout.close()
 htmlout.close()
 txtout.close()
+	
+call(["rm","{}.html".format(to)])
