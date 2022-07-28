@@ -5,6 +5,7 @@ import string
 import re
 import sys
 from subprocess import call
+from bs4 import BeautifulSoup # We'll use BeautifulSoup to get the right style declarations.
 notes = 0
 
 
@@ -90,6 +91,10 @@ def numnotes():
 
 with open("{}.html".format(to)) as f:
 	lines = f.readlines()
+with open("{}.html".format(to)) as f:
+	data = f.read()
+
+soup = BeautifulSoup(data,"html.parser")
 comments = 1
 done_with_comments = False
 lastnotes = {}
@@ -106,31 +111,63 @@ for i in range(0,int(tt)+3):
 
 c_arr = [] # Comments array
 t_arr = [] # Story text array
+pc_possibilities = []
+pca = []
+pcb = []
 
-pca = lines[12][6:8] # Check to try to decide what style is main text and which is comment
-pcbfound = 13
-while pcbfound > 0:
-	if lines[pcbfound].find("text-indent") == -1:
-		pcb = lines[pcbfound][6:8] # Second style declaration should be the one used for footnotes...
-		pcbfound = 0
-	else:
-		pcbfound = pcbfound+1
-	if pcbfound >= 25:
-		pcbfound = -1
-if pcbfound == -1:
-	lines = []
+style = soup.find("style").text
+styles = style.split("\n")
+for s in styles:
+	s_sub = s.strip().split("{")
+	if len(s_sub) == 2:
+		s_name = s_sub[0].split(".")
+		if len(s_name) == 2:
+			pc_possibilities.append(s_name[1].strip()) # i.e. this is all the styles that are declared in this sheet.
 
+for i in range(0,len(lines)):
+	if lines[i].find("<hr>") != -1:
+		footnote_start = i
+
+#print(footnote_start) # What we'll do, is we'll take every <p> tag after this and add its style to the list of footnote styles.
+for i in range(footnote_start,len(lines)):
+	line = BeautifulSoup(lines[i],"html.parser")
+	line_p = line.find_all("p")
+	if len(line_p) != 0:
+		line_p_style = line_p[0]["class"]
+		if line_p_style[0] not in pcb:
+			pcb.append(line_p_style[0])
+
+for p in pc_possibilities:
+	if p not in pcb:
+		pca.append(p)
+
+#pca = lines[12][6:8] # Check to try to decide what style is main text and which is comment
+print(pca,pcb)
+
+old_line = "" # We use this for being able to group comment lines together.
 for line in lines:
-	if(line[10:12]==pca):
+	if(line[10:12] in pca):
 		line = re.sub("<a id=\"commentlink[0-9]+\"><\/a><a href=\"#comment[0-9]+\">","[[",line)
 		line = re.sub("<a id=\"commentlink[0-9]+\"><\/a><\/i><a href=\"#comment[0-9]+\">","</i>[[",line)
 		line = re.sub("</a>","]]",line)
-		t_arr.append(line)
-	elif(line[10:12]==pcb):
-		line = re.sub("<a id=\"comment[0-9]+\"><\/a><a href=\"#commentlink[0-9]+\">.*<\/a><i>: ","<i>",line)
-		line = re.sub("<a id=\"comment[0-9]+\"><\/a><a href=\"#commentlink[0-9]+\">.*<\/a>: ","",line)
-		line = re.sub("<img src=\"Images.*alt=\"Image\">","",line) # Removing any images included as inline on the export
-		c_arr.append(line)
+		t_arr.append(line) # So this was a normal line of text. Lines of text can't span multiple lines. Comments can.
+	elif(line[10:12] in pcb):
+		if line.find("<a id=\"comment") != -1:
+			# So this either IS or BEGINS a comment line
+			if old_line != "":
+				c_arr.append(old_line)
+				old_line = ""
+			line = re.sub("<a id=\"comment[0-9]+\"><\/a><a href=\"#commentlink[0-9]+\">.*<\/a><i>: ","<i>",line)
+			line = re.sub("<a id=\"comment[0-9]+\"><\/a><a href=\"#commentlink[0-9]+\">.*<\/a>: ","",line)
+			line = re.sub("<img src=\"Images.*alt=\"Image\">","",line) # Removing any images included as inline on the export
+			old_line = line
+		else:
+			line = re.sub("<br>","&lt;br /&gt;&lt;br /&gt;",line)
+			old_line = "{}{}".format(old_line,line)
+			print(old_line)
+
+if old_line != "":
+	c_arr.append(old_line)
 
 lines = []
 
@@ -160,6 +197,8 @@ for line in lines:
 		line = line.replace("'","&#038;apos;")
 		line = line.replace("<","&lt;")
 		line = line.replace(">","&gt;")
+		line = re.sub("&lt;br /&gt;&lt;br /&gt;&lt;ul&gt;","&lt;br /&gt;&lt;ul&gt;",line)
+		line = re.sub("&lt;br /&gt;&lt;br /&gt;&lt;img","&lt;br /&gt;&lt;img",line)
 		if(line=="ECB"):
 			done_with_comments = True
 			xmlout.write("\t\t</hints>\n\t</metadata>\n\t<comments />\n\t<textsections>\n\t\t<section>\n\t\t\t<block>100</block>\n\t\t\t<variant>1</variant>\n\t\t\t<default>true</default>\n\t\t\t<destination>200</destination>\n\t\t\t<requirements />\n\t\t\t<content>")
@@ -190,6 +229,7 @@ for line in lines:
 					lcolor = ldata[0]
 				xmlout.write("\t\t\t<hint>\n\t\t\t\t<id>{}</id>\n".format(comments))
 				xmlout.write("\t\t\t\t<color>{}</color>\n".format(lcolor))
+				print(ldata[1])
 				if ldata[0]=="S" or ldata[0]=="SI":
 					xmlout.write("\t\t\t\t<spoiler>true</spoiler>\n")
 				if ldata[0]=="I" or ldata[0]=="NI" or ldata[0]=="CI" or ldata[0]=="SI":

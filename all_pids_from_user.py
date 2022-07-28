@@ -20,6 +20,7 @@ s_head = {
     "User-Agent":"Opera/9.80 (X11; Linux i686; Ubuntu/14.10) Presto/2.12.388 Version/12.16",
     "referrer":"https://www.sofurry.com"
 }
+user_stories = {}
 
 def get_folders(uid):
     # Given a user ID, download a list of their folders.
@@ -51,6 +52,7 @@ def get_stories(uid,fid=False):
     # Get a list of story UIDs from a user or folder
     # We do not KNOW how many stories a user might have, but the API only returns 30 at a time
     global session_requests
+    global user_stories
 
     s_list = [] # Array of submissions
     page_idx = 1
@@ -66,15 +68,17 @@ def get_stories(uid,fid=False):
         if result.status_code == 200:
             json_data = json.loads(result.content)
             stories = json_data["items"]
+            print(url)
             if len(stories) < 30:
                 # If the result has fewer than 30 stories, we don't need to try incrementing stories-page 
                 finished = True
             for s in stories:
                 s_id = int(s["id"])
                 s_title = s["title"]
-                if s_id in s_list:
+                if s_id in user_stories:
                     finished = True
                 else:
+                    user_stories[s_id] = s_title
                     s_list.append([s_id,s_title])
         else:
             finished = True
@@ -139,3 +143,5 @@ if user_id != -1 and sf_username != "" and sf_password != "":
                 all_titles.append(s[1])
 for i in range(0,len(all_stories)):
     print("{}\t{}".format(all_stories[i],all_titles[i]))
+
+print(len(user_stories))

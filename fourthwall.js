@@ -1,5 +1,5 @@
 "use strict";
-var fw_version_no = "0.82.0";
+var fw_version_no = "0.83.0";
 var fw_story_raw_data;
 var fw_last_changed_frame;
 var fw_story_xml;
